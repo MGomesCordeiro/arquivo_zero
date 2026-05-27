@@ -15,3 +15,9 @@ desktop.ini
 # Ficheiros temporários
 *.tmp
 *.log
+
+# Áudio — ficheiros grandes, geridos separadamente
+audio/sfx/
+audio/music/
+AUDIO FILES/
+EDITED AUDIO FILES/
