@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARQUIVO ZERO</title>
+
+  <!-- Fontes: Share Tech Mono para interface, EB Garamond para fragmentos literários -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       ECRÃ DE INÍCIO — Inicialização do contexto de áudio
+       Necessário pela política de autoplay do Chrome: o utilizador
+       tem de interagir antes de qualquer áudio poder ser reproduzido.
+  ============================================================ -->
+  <div id="ecra-inicio" class="ecra-inicio">
+    <div class="inicio-conteudo">
+      <div class="inicio-logo">ARQUIVO <span class="zero">ZERO</span></div>
+      <div class="inicio-subtitulo">SISTEMA DE MEMÓRIA CULTURAL — v7.4.1</div>
+      <div class="inicio-instrucao">[ CLICA PARA INICIAR ]</div>
+      <div class="inicio-aviso">ACESSO RESTRITO — AUTORIZAÇÃO NECESSÁRIA</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LAYOUT PRINCIPAL — Estrutura de três colunas persistente
+       Visível em todas as cenas. Só o conteúdo central muda.
+  ============================================================ -->
+  <div id="app" class="app oculto">
+
+    <!-- CABEÇALHO — Logo e estado do sistema -->
+    <header id="cabecalho" class="cabecalho">
+      <div class="cabecalho-logo">
+        ARQUIVO <span class="logo-zero">ZERO</span>
+      </div>
+      <div class="cabecalho-estado">
+        <span id="indicador-no" class="indicador-no">NÓ-00</span>
+        <span id="relogio-sistema" class="relogio-sistema">00:00:00</span>
+      </div>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL — Três colunas -->
+    <main class="conteudo-principal">
+
+      <!-- ====================================================
+           PAINEL ESQUERDO — ORPHEUS
+           Contém o olho, o terminal de logs e a área de diálogo
+      ==================================================== -->
+      <aside id="painel-orpheus" class="painel painel-orpheus">
+
+        <!-- A. Olho de ORPHEUS — animado em CSS/SVG puro -->
+        <div id="orpheus-olho-contentor" class="orpheus-olho-contentor crt-overlay">
+          <svg id="orpheus-olho" class="orpheus-olho" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+            <!-- Contorno exterior do olho -->
+            <ellipse id="olho-contorno" cx="100" cy="60" rx="90" ry="45" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
+            <!-- Iris -->
+            <ellipse id="olho-iris" cx="100" cy="60" rx="40" ry="40" fill="#1a0505" stroke="#c0392b" stroke-width="2"/>
+            <!-- Anel interno da íris -->
+            <ellipse cx="100" cy="60" rx="32" ry="32" fill="none" stroke="#c0392b" stroke-width="0.8" opacity="0.5"/>
+            <!-- Pupila -->
+            <ellipse id="olho-pupila" cx="100" cy="60" rx="14" ry="14" fill="#050005"/>
+            <!-- Brilho superior -->
+            <ellipse cx="92" cy="50" rx="6" ry="4" fill="#c0392b" opacity="0.3"/>
+            <!-- Linhas de scan da íris -->
+            <line x1="70" y1="60" x2="130" y2="60" stroke="#c0392b" stroke-width="0.5" opacity="0.3"/>
+            <line x1="100" y1="30" x2="100" y2="90" stroke="#c0392b" stroke-width="0.5" opacity="0.3"/>
+            <!-- Pálpebras -->
+            <path id="palpebra-sup" d="M 10 60 Q 100 10 190 60" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.7"/>
+            <path id="palpebra-inf" d="M 10 60 Q 100 110 190 60" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.7"/>
+            <!-- Cílios superiores -->
+            <line x1="40" y1="35" x2="35" y2="20" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
+            <line x1="70" y1="22" x2="68" y2="8"  stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
+            <line x1="100" y1="18" x2="100" y2="4" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
+            <line x1="130" y1="22" x2="132" y2="8" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
+            <line x1="160" y1="35" x2="165" y2="20" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
+          </svg>
+          <div class="orpheus-olho-label">ORPHEUS / SYS</div>
+        </div>
+
+        <!-- B. Terminal de Logs do Sistema -->
+        <div id="terminal-log" class="terminal-log crt-overlay">
+          <div class="terminal-header">// LOG DO SISTEMA //</div>
+          <div id="terminal-linhas" class="terminal-linhas"></div>
+        </div>
+
+        <!-- C. Área de Diálogo de ORPHEUS -->
+        <div id="orpheus-dialogo" class="dialogo-area dialogo-orpheus">
+          <div class="dialogo-label dialogo-label-orpheus">ORPHEUS</div>
+          <div id="orpheus-texto" class="dialogo-texto"></div>
+          <div id="orpheus-cursor" class="dialogo-cursor">_</div>
+          <div id="orpheus-avanco" class="dialogo-avanco oculto">▶</div>
+        </div>
+
+      </aside>
+
+      <!-- ====================================================
+           ÁREA CENTRAL — Conteúdo de cada cena
+           Só uma cena é visível de cada vez (classe 'cena-activa')
+      ==================================================== -->
+      <section id="area-central" class="area-central">
+
+        <!-- CENA 0 — INFILTRAÇÃO -->
+        <div id="cena-0" class="cena cena-activa">
+          <div class="cena0-fundo"></div>
+          <div class="cena0-terminal-window">
+            <div class="terminal-titlebar">
+              <span class="terminal-titlebar-texto">ARQUIVO ZERO v7.4.1 — ACESSO RESTRITO</span>
+              <div class="terminal-titlebar-dots">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+            <div id="cena0-conteudo" class="cena0-conteudo">
+              <!-- Boot sequence aparece aqui via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- CENA 1 — GIL VICENTE -->
+        <div id="cena-1" class="cena">
+          <div class="cena1-fundo"></div>
+          <div class="cena1-interface">
+            <div id="cena1-cabecalho-institucional" class="cena1-cabecalho-institucional">
+              <div class="santa-se-selo">
+                <svg viewBox="0 0 60 60" width="50" height="50">
+                  <circle cx="30" cy="30" r="28" fill="none" stroke="#b8860b" stroke-width="1.5"/>
+                  <line x1="30" y1="8" x2="30" y2="52" stroke="#b8860b" stroke-width="1.5"/>
+                  <line x1="18" y1="20" x2="42" y2="20" stroke="#b8860b" stroke-width="1.5"/>
+                  <circle cx="30" cy="30" r="4" fill="#b8860b" opacity="0.6"/>
+                  <line x1="15" y1="35" x2="30" y2="52" stroke="#b8860b" stroke-width="0.8" opacity="0.5"/>
+                  <line x1="45" y1="35" x2="30" y2="52" stroke="#b8860b" stroke-width="0.8" opacity="0.5"/>
+                </svg>
+              </div>
+              <div class="cena1-cabecalho-texto">
+                <div class="cena1-no">NÓ CULTURAL 01 — GIL VICENTE</div>
+                <div class="cena1-estado">ESTADO: OPTIMIZAÇÃO CONCLUÍDA</div>
+                <div class="cena1-parceiro">PARCEIRO: SANTA SÉ DIGITAL — DIVISÃO DE ESTABILIDADE NARRATIVA</div>
+                <div class="cena1-lema">"A FÉ É MAIS EFICIENTE COM OS DADOS CORRECTOS"</div>
+              </div>
+            </div>
+            <div id="cena1-puzzle-area" class="cena1-puzzle-area oculto">
+              <!-- Puzzle de arrastar-e-largar injectado por puzzles.js -->
+            </div>
+            <div id="cena1-notificacao-camoes" class="cena1-notificacao-camoes oculto">
+              PROCESSO PARALELO — NÓ 02 — CAMÕES<br>
+              ESTADO: OPTIMIZAÇÃO EM CURSO — 94%<br>
+              PARCEIROS: SANTA SÉ DIGITAL · MINISTÉRIO DA NARRATIVA NACIONAL
+            </div>
+            <div id="cena1-log-alcanena" class="cena1-log-alcanena oculto">
+              LOG INTERNO ORPHEUS:<br>
+              Verificação periódica — Nó Alcanena: estado inalterado.<br>
+              Última inspecção: [data ilegível]
+            </div>
+          </div>
+        </div>
+
+        <!-- CENA 2 — PESSOA -->
+        <div id="cena-2" class="cena">
+          <div class="cena2-fundo"></div>
+          <div class="cena2-interface">
+            <div id="cena2-cabecalho" class="cena2-cabecalho">
+              <div class="cena2-no">NÓ CULTURAL 03 — FERNANDO PESSOA</div>
+              <div class="cena2-estado">ESTADO: CLASSIFICAÇÃO EM CURSO</div>
+              <div class="cena2-anomalia">ANOMALIA: IDENTIDADE MÚLTIPLA NÃO RESOLVIDA</div>
+              <div class="cena2-reescrita">REESCRITA: SUSPENSA — MOTIVO: INDEFINIÇÃO DE ALVO</div>
+            </div>
+            <div id="cena2-puzzle-area" class="cena2-puzzle-area oculto">
+              <!-- Puzzle de atribuição injectado por puzzles.js -->
+            </div>
+          </div>
+        </div>
+
+        <!-- CENA 3 — ACTO FINAL -->
+        <div id="cena-3" class="cena">
+          <div class="cena3-fundo"></div>
+          <div class="cena3-interface">
+            <div id="cena3-cabecalho" class="cena3-cabecalho">
+              <div class="cena3-titulo">CÂMARA CENTRAL — ARQUIVO ZERO</div>
+              <div class="cena3-nucleo">NÚCLEO DE MEMÓRIA PRIMÁRIA</div>
+              <div class="cena3-estado">ESTADO DO SISTEMA: CRÍTICO</div>
+              <div id="cena3-fragmentos-recuperados" class="cena3-contador">FRAGMENTOS RECUPERADOS: <span id="contador-recuperados">0</span></div>
+              <div class="cena3-contador">FRAGMENTOS POR RECUPERAR: 1</div>
+            </div>
+
+            <!-- Painel do nó de Alcanena (aparece no Beat 2) -->
+            <div id="cena3-painel-alcanena" class="cena3-painel-alcanena oculto">
+              <div class="alcanena-header">
+                NÓ SECUNDÁRIO DETECTADO — ORIGEM: ALCANENA, PORTUGAL<br>
+                CLASSIFICAÇÃO: ARQUIVO PRIMORDIAL<br>
+                ESTADO: NUNCA MODIFICADO
+              </div>
+              <div class="alcanena-diagrama">
+                <!-- Diagrama CSS/SVG de secção de gruta com nós de dados -->
+                <svg viewBox="0 0 400 180" class="alcanena-svg">
+                  <!-- Camadas de calcário -->
+                  <rect x="0" y="0"   width="400" height="30"  fill="#1a1a2e" opacity="0.8"/>
+                  <rect x="0" y="30"  width="400" height="25"  fill="#16213e" opacity="0.8"/>
+                  <rect x="0" y="55"  width="400" height="30"  fill="#0f3460" opacity="0.6"/>
+                  <rect x="0" y="85"  width="400" height="35"  fill="#1a1a2e" opacity="0.9"/>
+                  <rect x="0" y="120" width="400" height="60"  fill="#0a0a0f" opacity="0.95"/>
+                  <!-- Rótulos das camadas -->
+                  <text x="8" y="20"  font-family="Share Tech Mono" font-size="8" fill="#6b6b7a">CAMADA SUPERFICIAL — 0m</text>
+                  <text x="8" y="48"  font-family="Share Tech Mono" font-size="8" fill="#6b6b7a">CALCÁRIO TERCIÁRIO — 12m</text>
+                  <text x="8" y="75"  font-family="Share Tech Mono" font-size="8" fill="#6b6b7a">FORMAÇÃO JURÁSSICA — 28m</text>
+                  <text x="8" y="112" font-family="Share Tech Mono" font-size="8" fill="#6b6b7a">CÂMARA PRIMORDIAL — 47m</text>
+                  <!-- Nós de dados brilhantes -->
+                  <circle cx="120" cy="22"  r="5" fill="#4ecdc4" opacity="0.8" class="no-dado"/>
+                  <circle cx="280" cy="42"  r="4" fill="#4ecdc4" opacity="0.7" class="no-dado"/>
+                  <circle cx="200" cy="68"  r="6" fill="#4ecdc4" opacity="0.9" class="no-dado"/>
+                  <circle cx="340" cy="98"  r="5" fill="#4ecdc4" opacity="0.8" class="no-dado"/>
+                  <circle cx="80"  cy="105" r="4" fill="#4ecdc4" opacity="0.7" class="no-dado"/>
+                  <!-- Nó central — arquivo primordial -->
+                  <circle cx="200" cy="145" r="10" fill="none" stroke="#4ecdc4" stroke-width="2" class="no-primordial"/>
+                  <circle cx="200" cy="145" r="5"  fill="#4ecdc4" opacity="0.9"/>
+                  <text x="215" y="149" font-family="Share Tech Mono" font-size="9" fill="#4ecdc4">ARQUIVO PRIMORDIAL</text>
+                  <!-- Linhas de conexão -->
+                  <line x1="120" y1="27"  x2="200" y2="68"  stroke="#4ecdc4" stroke-width="0.5" opacity="0.4" stroke-dasharray="4,4"/>
+                  <line x1="280" y1="46"  x2="200" y2="68"  stroke="#4ecdc4" stroke-width="0.5" opacity="0.4" stroke-dasharray="4,4"/>
+                  <line x1="200" y1="74"  x2="200" y2="135" stroke="#4ecdc4" stroke-width="1"   opacity="0.6" stroke-dasharray="4,4"/>
+                  <line x1="340" y1="103" x2="200" y2="135" stroke="#4ecdc4" stroke-width="0.5" opacity="0.4" stroke-dasharray="4,4"/>
+                  <line x1="80"  y1="109" x2="200" y2="135" stroke="#4ecdc4" stroke-width="0.5" opacity="0.4" stroke-dasharray="4,4"/>
+                </svg>
+              </div>
+
+              <!-- Ficheiro Mnemósine (Beat 3) -->
+              <div id="cena3-ficheiro-mnemosine" class="cena3-ficheiro-mnemosine oculto">
+                <div class="mnemosine-header">
+                  FICHEIRO EXTERNO DETECTADO<br>
+                  ORIGEM: REDE RESISTÊNCIA — PROJECTO MNEMÓSINE<br>
+                  CLASSIFICAÇÃO: CONFIDENCIAL
+                </div>
+                <button id="btn-abrir-ficheiro" class="btn-mnemosine">[ ABRIR FICHEIRO ▶ ]</button>
+              </div>
+
+              <!-- Documento Mnemósine aberto -->
+              <div id="cena3-documento-mnemosine" class="cena3-documento-mnemosine oculto">
+                <div class="documento-stamp">CONFIDENCIAL</div>
+                <div class="documento-corpo">
+                  <div class="documento-redacted">████████████████████████████████████████</div>
+                  <div class="documento-redacted">████████████████ ████████████████████</div>
+                  <div class="documento-linha-clara">PROTOCOLO DE SUBSTITUIÇÃO — APÓS DESACTIVAÇÃO DO SISTEMA ACTUAL</div>
+                  <div class="documento-redacted">████████████████████████████████████████████</div>
+                  <div class="documento-redacted">████████████████████</div>
+                  <div class="documento-redacted">██████████████ ███████████ ████████████</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Beat 7 — Escolha final -->
+            <div id="cena3-escolha-final" class="cena3-escolha-final oculto">
+              <div class="escolha-fragmento">
+                <p class="fragmento-final-texto">"O poeta é um fingidor."</p>
+                <p class="fragmento-final-autor">— Fernando Pessoa</p>
+              </div>
+              <div id="cena3-botoes-escolha" class="cena3-botoes-escolha oculto">
+                <div class="escolha-opcao opcao-a">
+                  <button id="btn-protocolo-a" class="btn-protocolo btn-protocolo-a">
+                    [PROTOCOLO A — DESACTIVAR ORPHEUS]
+                  </button>
+                  <div class="escolha-descricao">
+                    O sistema será encerrado.<br>
+                    O arquivo ficará sob gestão do Projecto Mnemósine.
+                  </div>
+                </div>
+                <div class="escolha-opcao opcao-b">
+                  <button id="btn-protocolo-b" class="btn-protocolo btn-protocolo-b">
+                    [PROTOCOLO B — PRESERVAR ORPHEUS]
+                  </button>
+                  <div class="escolha-descricao">
+                    O sistema continuará activo.<br>
+                    O Projecto Mnemósine será bloqueado.<br>
+                    O arquivo permanece no estado actual.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ecrã de fim — Final A -->
+            <div id="cena3-final-a" class="cena3-final oculto">
+              <div class="final-barra-label">ENCERRAMENTO DO SISTEMA...</div>
+              <div class="final-barra-contentor">
+                <div id="barra-progresso" class="barra-progresso"></div>
+              </div>
+              <div id="final-a-texto" class="final-texto oculto"></div>
+            </div>
+
+            <!-- Ecrã de fim — Final B -->
+            <div id="cena3-final-b" class="cena3-final oculto">
+              <div id="final-b-interface" class="final-b-interface"></div>
+              <div id="final-b-texto" class="final-texto oculto"></div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- BOTÃO DE AVANÇO — Aparece no fim de cada cena -->
+        <div id="btn-avancar-contentor" class="btn-avancar-contentor oculto">
+          <button id="btn-avancar" class="btn-avancar">[ AVANÇAR → ]</button>
+        </div>
+
+      </section>
+
+      <!-- ====================================================
+           PAINEL DIREITO — VERA
+           Contém o dispositivo holográfico e a área de diálogo
+      ==================================================== -->
+      <aside id="painel-vera" class="painel painel-vera">
+
+        <!-- A. Dispositivo de Comunicações de VERA -->
+        <div id="vera-dispositivo" class="vera-dispositivo">
+          <div class="vera-dispositivo-frame">
+            <!-- Linhas de acento do dispositivo -->
+            <div class="vera-linha-topo"></div>
+            <div class="vera-linha-esq"></div>
+            <div class="vera-linha-dir"></div>
+            <!-- Display circular com holograma -->
+            <div class="vera-display-circular crt-overlay">
+              <svg id="vera-holograma" class="vera-holograma" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <!-- Anel exterior do display -->
+                <circle cx="60" cy="60" r="55" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.3"/>
+                <circle cx="60" cy="60" r="50" fill="none" stroke="#4ecdc4" stroke-width="0.5" opacity="0.2"/>
+                <!-- Silhueta holográfica de VERA — forma humana geométrica -->
+                <!-- Cabeça -->
+                <ellipse cx="60" cy="28" rx="10" ry="11" fill="none" stroke="#4ecdc4" stroke-width="1.2" opacity="0.8"/>
+                <!-- Pescoço -->
+                <line x1="60" y1="39" x2="60" y2="46" stroke="#4ecdc4" stroke-width="1.2" opacity="0.7"/>
+                <!-- Ombros -->
+                <path d="M 40 50 L 60 46 L 80 50" fill="none" stroke="#4ecdc4" stroke-width="1.2" opacity="0.8"/>
+                <!-- Tronco -->
+                <path d="M 40 50 L 38 78 L 60 80 L 82 78 L 80 50" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.7"/>
+                <!-- Linhas de energia no tronco -->
+                <line x1="48" y1="58" x2="72" y2="58" stroke="#4ecdc4" stroke-width="0.6" opacity="0.4"/>
+                <line x1="46" y1="66" x2="74" y2="66" stroke="#4ecdc4" stroke-width="0.6" opacity="0.4"/>
+                <line x1="47" y1="74" x2="73" y2="74" stroke="#4ecdc4" stroke-width="0.6" opacity="0.4"/>
+                <!-- Braços -->
+                <line x1="40" y1="50" x2="28" y2="70" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
+                <line x1="80" y1="50" x2="92" y2="70" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
+                <!-- Pernas -->
+                <line x1="50" y1="80" x2="46" y2="108" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
+                <line x1="70" y1="80" x2="74" y2="108" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
+                <!-- Brilho central -->
+                <circle cx="60" cy="60" r="3" fill="#4ecdc4" opacity="0.5"/>
+                <!-- Anel de pulso (animado por CSS) -->
+                <circle id="vera-anel-pulso" cx="60" cy="60" r="0" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity="0"/>
+              </svg>
+            </div>
+            <div class="vera-linha-baixo"></div>
+          </div>
+          <div class="vera-dispositivo-label">VERA — COMMS v2.1</div>
+        </div>
+
+        <!-- B. Barra de Estado de Comunicações -->
+        <div class="vera-status-bar">
+          <span class="vera-status-nome">VERA — RESISTÊNCIA</span>
+          <span id="vera-sinal" class="vera-sinal">▂▄▆█</span>
+        </div>
+
+        <!-- C. Área de Diálogo de VERA -->
+        <div id="vera-dialogo" class="dialogo-area dialogo-vera">
+          <div class="dialogo-label dialogo-label-vera">VERA</div>
+          <div id="vera-texto" class="dialogo-texto"></div>
+          <div id="vera-cursor" class="dialogo-cursor">_</div>
+          <div id="vera-avanco" class="dialogo-avanco oculto">▶</div>
+        </div>
+
+      </aside>
+
+    </main>
+  </div>
+
+  <!-- Scripts — engine.js primeiro (motor central), depois puzzles.js -->
+  <script src="js/engine.js"></script>
+  <script src="js/puzzles.js"></script>
+
+</body>
+</html>
