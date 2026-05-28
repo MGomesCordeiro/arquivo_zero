@@ -16,8 +16,6 @@ desktop.ini
 *.tmp
 *.log
 
-# Áudio — ficheiros grandes, geridos separadamente
-audio/sfx/
-audio/music/
+# Pastas de áudio bruto (ficheiros de trabalho externos ao projecto)
 AUDIO FILES/
 EDITED AUDIO FILES/
