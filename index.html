@@ -19,11 +19,35 @@
   ============================================================ -->
   <div id="ecra-inicio" class="ecra-inicio">
     <div class="inicio-conteudo">
+      <div class="inicio-logo-vanguard">[LOGO VANGUARD STUDIOS]</div>
       <div class="inicio-logo">ARQUIVO <span class="zero">ZERO</span></div>
       <div class="inicio-subtitulo">SISTEMA DE MEMÓRIA CULTURAL — v7.4.1</div>
-      <div class="inicio-instrucao">[ CLICA PARA INICIAR ]</div>
-      <div class="inicio-aviso">ACESSO RESTRITO — AUTORIZAÇÃO NECESSÁRIA</div>
+      <div class="inicio-instrucao">CLIQUE PARA COMEÇAR</div>
     </div>
+    <div class="inicio-rodape">
+      <div class="inicio-logos-row">
+        <div class="logo-placeholder-pequeno">[LOGO ESCOLA]</div>
+        <div class="logo-placeholder-pequeno">[LOGO VANGUARD STUDIOS]</div>
+        <div class="logo-placeholder-pequeno">[LOGO MINISTÉRIO DA EDUCAÇÃO]</div>
+      </div>
+      <div class="inicio-licenca">
+        © 2026 Vanguard Studios · Licenciado sob
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pt" target="_blank" class="licenca-link">CC BY-NC-ND 4.0</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       ECRÃ DE ABERTURA — Introdução narrativa (9 blocos de texto)
+       Controlada pelo jogador (Espaço / clique). Precede a Cena 0.
+  ============================================================ -->
+  <div id="abertura" class="ecra-fullscreen oculto">
+    <div class="abertura-fundo crt-overlay"></div>
+    <div class="abertura-fragmentos-fundo" id="abertura-fragmentos-fundo"></div>
+    <div class="abertura-centro">
+      <div class="abertura-conteudo" id="abertura-conteudo"></div>
+    </div>
+    <div class="abertura-instrucao">[ ESPAÇO / CLIQUE — avançar ]</div>
   </div>
 
   <!-- ============================================================
@@ -369,6 +393,105 @@
       </aside>
 
     </main>
+  </div>
+
+  <!-- ============================================================
+       ECRÃ DE CRÉDITOS — Mostrado após qualquer um dos finais
+  ============================================================ -->
+  <div id="ecra-creditos" class="ecra-fullscreen oculto">
+    <div class="creditos-conteudo">
+      <div class="creditos-texto">
+        VANGUARD STUDIOS<br>
+        apresenta<br><br>
+        <span class="creditos-titulo">ARQUIVO <span class="creditos-zero">ZERO</span></span><br><br>
+        ———<br><br>
+        Disciplina: Aplicações Informáticas B<br>
+        Professor: Carlos Sousa<br><br>
+        Alunos:<br>
+        Miguel Cordeiro<br>
+        Diogo Lourenço<br>
+        Luís Agostinho<br><br>
+        ———<br><br>
+        Concluído a 29 de maio de 2026<br>
+        Apresentado a 1 de junho de 2026
+      </div>
+      <div class="creditos-logos-row">
+        <div class="logo-placeholder">[LOGO ESCOLA]</div>
+        <div class="logo-placeholder">[LOGO VANGUARD STUDIOS]</div>
+        <div class="logo-placeholder">[LOGO MINISTÉRIO DA EDUCAÇÃO]</div>
+      </div>
+      <div class="creditos-licenca-bloco">
+        © 2026 Vanguard Studios (Miguel Cordeiro, Diogo Lourenço, Luís Agostinho)<br>
+        Esta obra está licenciada sob<br>
+        <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.pt" target="_blank" class="licenca-link">
+          Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0)
+        </a>
+        <div class="cc-icons">
+          <span class="cc-icon">CC</span>
+          <span class="cc-icon">BY</span>
+          <span class="cc-icon">NC</span>
+          <span class="cc-icon">ND</span>
+        </div>
+      </div>
+      <div class="creditos-terceiros">
+        <div class="creditos-terceiros-titulo">CRÉDITOS DE MATERIAIS DE TERCEIROS</div>
+        Música:<br>
+        [título] — [autor] — [licença] — [link]<br><br>
+        Efeitos sonoros:<br>
+        [título] — [autor] — [licença] — [link]<br><br>
+        Imagens:<br>
+        [título/descrição] — [autor/fonte] — [licença] — [link]<br><br>
+        Obras literárias citadas:<br>
+        Gil Vicente, "Auto da Barca do Inferno" (domínio público)<br>
+        Fernando Pessoa, excertos de Caeiro, Reis, Campos e do ortónimo (domínio público)<br>
+        Referências a Luís de Camões e a José Saramago (sem citação directa)
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODAL — DOCUMENTO PROJECTO MNEMÓSINE (Cena 3, Beat 3)
+       Overlay de ecrã completo com documento desencriptado por ORPHEUS.
+  ============================================================ -->
+  <div id="modal-mnemosine" class="modal-overlay oculto" role="dialog" aria-modal="true">
+    <div class="modal-panel crt-overlay">
+      <div class="modal-header-bar">
+        <span class="modal-header-texto">DESENCRIPTADO POR ORPHEUS</span>
+        <span class="modal-blink-indicador">●</span>
+      </div>
+      <div class="modal-stamp-reservado">RESERVADO</div>
+      <div class="modal-corpo" id="modal-corpo">
+        <!-- Conteúdo revelado progressivamente por engine.js -->
+      </div>
+      <div class="modal-fechar-contentor">
+        <button id="modal-fechar-btn" class="modal-fechar-btn">[FECHAR]</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PAINEL DEV — Visível apenas via Ctrl+Shift+D
+       Permite saltar para qualquer cena/estado durante a apresentação.
+  ============================================================ -->
+  <div id="painel-dev" class="painel-dev oculto">
+    <div class="painel-dev-titulo">⚙ PAINEL DEV</div>
+    <div class="painel-dev-secao">IR PARA:</div>
+    <div class="painel-dev-botoes">
+      <button class="btn-dev" onclick="mudarEcra('abertura')">Abertura</button>
+      <button class="btn-dev" onclick="mudarEcra('cena-0')">Cena 0</button>
+      <button class="btn-dev" onclick="mudarEcra('cena-1')">Cena 1</button>
+      <button class="btn-dev" onclick="mudarEcra('cena-2')">Cena 2</button>
+      <button class="btn-dev" onclick="mudarEcra('cena-3')">Cena 3</button>
+      <button class="btn-dev btn-dev-vermelho" onclick="mudarEcra('final-a')">Final A</button>
+      <button class="btn-dev btn-dev-dim" onclick="mudarEcra('final-b')">Final B</button>
+      <button class="btn-dev" onclick="mudarEcra('creditos')">Créditos</button>
+    </div>
+    <div class="painel-dev-secao">CONTROLES:</div>
+    <div class="painel-dev-botoes">
+      <button class="btn-dev" onclick="devReiniciarPuzzle()">↺ Puzzle</button>
+      <button class="btn-dev" onclick="devReiniciarCena()">↺ Cena</button>
+      <button class="btn-dev" onclick="avancarDialogo()">▶ Diálogo</button>
+    </div>
   </div>
 
   <!-- Scripts — engine.js primeiro (motor central), depois puzzles.js -->

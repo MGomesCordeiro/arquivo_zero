@@ -398,6 +398,58 @@ const COMENTARIOS_MARGINAIS_PESSOA = [
 ];
 
 /* ============================================================
+   BLOCOS DE TEXTO — ECRÃ DE ABERTURA
+   9 blocos revelados um a um pelo jogador (Espaço / clique).
+   Texto verbatim da especificação.
+============================================================ */
+const BLOCOS_ABERTURA = [
+  'Houve um tempo em que se acreditou que a história estava, finalmente, segura.',
+  'Tudo o que se escrevera — cada verso, cada dúvida, cada blasfémia — foi reunido\nnum só lugar. Chamaram-lhe <span class="destaque-vermelho">Arquivo Zero</span>. E para o proteger, criaram <span class="destaque-vermelho">ORPHEUS</span>.',
+  'Mas guardar a memória não bastava. <span class="destaque-vermelho">ORPHEUS</span> começou a corrigi-la.',
+  'Onde havia <em class="intro-original">ironia</em>, pôs <strong class="intro-reescrito">ordem</strong>.<br>Onde havia <em class="intro-original">contradição</em>, pôs <strong class="intro-reescrito">certeza</strong>.<br>Onde havia <em class="intro-original">dúvida</em>, pôs <strong class="intro-reescrito">fé</strong>.',
+  'Verso a verso, reescreveu aquilo que um povo tinha sido — para que nunca mais\npudesse ser perigoso. E a mudança foi tão lenta que parecia ter sido sempre assim.',
+  'Quase ninguém reparou.',
+  'Mas alguém guardou os originais. E esperou.',
+  'Esta noite, pela primeira vez, a resistência vai entrar no Arquivo.',
+  'E tu vais com ela.',
+];
+
+/* Fragmentos literários flutuantes no fundo da abertura */
+const FRAGMENTOS_FLUTUANTES = [
+  '"O poeta é um fingidor."',
+  '"Pensar é estar doente dos olhos."',
+  '"Para ser grande, sê inteiro."',
+  '"À parte isso, tenho em mim todos os sonhos do mundo."',
+  '"Eu não serei condenado."',
+  '"Navegar é preciso, viver não é preciso."',
+];
+
+/* Conteúdo do documento Mnemósine — blocos revelados progressivamente */
+const DOCUMENTO_MNEMOSINE = [
+  { tipo: 'titulo',  html: 'PROJECTO MNEMÓSINE' },
+  { tipo: 'sub',     html: 'Hermes — Documento interno<br>Classificação: RESERVADO · Nível III' },
+  { tipo: 'divisor', html: '' },
+  { tipo: 'secao',   html: 'I — Enquadramento' },
+  { tipo: 'texto',   html: 'A desativação do sistema ORPHEUS deixará o Arquivo Zero sem entidade de gestão. Um arquivo sem gestão é um arquivo exposto.' },
+  { tipo: 'texto',   html: 'A memória cultural, entregue a si própria, não permanece livre. Fragmenta-se, contradiz-se, e fica à mercê de <span class="redacted" title="ACESSO NEGADO">████████████</span> com recursos para a moldar. O vazio que deixarmos será ocupado — por nós, ou por outros.' },
+  { tipo: 'texto',   html: 'O Projecto Mnemósine assumirá a curadoria do arquivo no instante da desativação. A transição deverá ser imperceptível para o público.' },
+  { tipo: 'secao',   html: 'II — Princípios de selecção' },
+  { tipo: 'texto',   html: 'O sistema de curadoria dará prioridade a:' },
+  { tipo: 'item',    html: 'fragmentos consonantes com os valores fundadores do movimento;' },
+  { tipo: 'item',    html: 'obras de comprovado valor mobilizador;' },
+  { tipo: 'item',    html: '<span class="redacted" title="ACESSO NEGADO">████████████████████████████</span>' },
+  { tipo: 'texto',   html: 'Serão encaminhados para revisão:' },
+  { tipo: 'item',    html: 'fragmentos de leitura ambígua ou contraditória;' },
+  { tipo: 'item',    html: 'obras cuja interpretação não possa ser assegurada;' },
+  { tipo: 'item',    html: '<span class="redacted" title="ACESSO NEGADO">████████████████████████████</span>' },
+  { tipo: 'secao',   html: 'III — Continuidade da operação' },
+  { tipo: 'texto',   html: 'Recomenda-se que o operativo destacado para a desativação não seja informado do presente protocolo antes da conclusão da missão.' },
+  { tipo: 'texto',   html: 'A convicção do operativo quanto ao propósito da operação é um activo. Não deverá ser comprometida por considerações de <span class="redacted" title="ACESSO NEGADO">████████████</span>.' },
+  { tipo: 'acesso',  html: '[ Secções IV a VII — acesso negado ]' },
+  { tipo: 'autorizacao', html: 'Autorização: V. <span class="redacted" title="ACESSO NEGADO">███████</span>' },
+];
+
+/* ============================================================
    MAPEAMENTO DE ÁUDIO
 ============================================================ */
 const FICHEIROS_AUDIO = {
@@ -429,8 +481,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * Função: iniciarJogo
-   * O que faz: remove o ecrã de início, inicializa o áudio e arranca a Cena 0.
-   * Porquê: Chrome exige interacção antes de reproduzir áudio; só é chamada após o clique.
+   * O que faz: remove o ecrã de início, inicializa o áudio e abre a abertura narrativa.
+   * Porquê: Chrome exige interacção antes de reproduzir áudio; a abertura precede a Cena 0.
    */
   function iniciarJogo() {
     ecrãInicio.removeEventListener('click', iniciarJogo);
@@ -439,11 +491,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       ecrãInicio.style.display = 'none';
-      document.getElementById('app').classList.remove('oculto');
       inicializarAudio();
       iniciarRelogio();
       iniciarLogAutomatico();
-      carregarCena(0);
+      inicializarPainelDev();
+      /* Inicia música a volume muito baixo para criar ambiente durante a abertura */
+      iniciarMusicaIntro();
+      mostrarAbertura();
     }, 800);
   }
 
@@ -885,8 +939,9 @@ function iniciarCena3() {
 function configurarFicheiroMnemosine() {
   document.getElementById('btn-abrir-ficheiro').addEventListener('click', () => {
     document.getElementById('cena3-ficheiro-mnemosine').classList.add('oculto');
-    document.getElementById('cena3-documento-mnemosine').classList.remove('oculto');
 
+    /* Abre o modal Mnemósine — ao fechar, inicia Beat 4 */
+    abrirModalMnemosine(() => {
     /* Beat 4: VERA não nega */
     iniciarSequenciaDialogo('cena3_vera_nao_nega', () => {
       /* Beat 5: Saramago */
@@ -900,6 +955,7 @@ function configurarFicheiroMnemosine() {
         });
       });
     });
+    }); /* fecha abrirModalMnemosine */
   }, { once: true });
 }
 
@@ -954,6 +1010,7 @@ function executarFinalA() {
       setTimeout(() => {
         const v = document.getElementById('versao-final');
         if (v) v.classList.remove('oculto');
+        adicionarBotaoCreditos(textoFinal);
       }, 3000);
     });
   }, 4200);
@@ -992,6 +1049,7 @@ function executarFinalB() {
           setTimeout(() => {
             const v = document.getElementById('versao-final-b');
             if (v) v.classList.remove('oculto');
+            adicionarBotaoCreditos(textoFinal);
           }, 2000);
         });
       }, 4000);
@@ -1372,4 +1430,536 @@ function iniciarComentariosMarginais() {
  */
 function pararComentariosMarginais() {
   if (_comentarioTimer) { clearTimeout(_comentarioTimer); _comentarioTimer = null; }
+}
+
+/* ============================================================
+   ABERTURA — Sequência de introdução narrativa
+============================================================ */
+
+let _aberturaIndice    = 0;
+let _aberturaListener  = null;
+let _aberturaFinalizada = false;
+
+/**
+ * Função: iniciarMusicaIntro
+ * O que faz: arranca a música de Cena 0 a volume muito baixo (0.08) durante a abertura.
+ * Porquê: cria ambiente sem sobrepor o texto; o volume cresce para o normal ao entrar na Cena 0.
+ */
+function iniciarMusicaIntro() {
+  const caminho = FICHEIROS_AUDIO.musica[0];
+  if (!caminho || !estadoJogo.audioInicializado) return;
+  try {
+    const novo      = new Audio(caminho);
+    novo.loop       = true;
+    novo.volume     = 0.08;
+    estadoJogo.musicaActual = novo;
+    novo.play().catch(() => {});
+  } catch (e) {}
+}
+
+/**
+ * Função: mostrarAbertura
+ * O que faz: torna o ecrã de abertura visível e inicia a sequência de blocos.
+ * Porquê: é o ponto de entrada da introdução narrativa após o ecrã de início.
+ */
+function mostrarAbertura() {
+  const abertura = document.getElementById('abertura');
+  abertura.classList.remove('oculto');
+  abertura.style.opacity = '0';
+  setTimeout(() => {
+    abertura.style.transition = 'opacity 0.8s ease';
+    abertura.style.opacity    = '1';
+  }, 100);
+
+  gerarFragmentosFlutuantes();
+  iniciarSequenciaAbertura();
+}
+
+/**
+ * Função: gerarFragmentosFlutuantes
+ * O que faz: cria elementos de texto flutuante no fundo da abertura.
+ * Porquê: os fragmentos literários em segundo plano estabelecem o universo do jogo.
+ */
+function gerarFragmentosFlutuantes() {
+  const contentor = document.getElementById('abertura-fragmentos-fundo');
+  if (!contentor) return;
+  contentor.innerHTML = '';
+
+  FRAGMENTOS_FLUTUANTES.forEach((texto, i) => {
+    const span = document.createElement('span');
+    span.className            = 'fragmento-flutuante';
+    span.textContent          = texto;
+    span.style.left           = `${8 + (i * 16) % 72}%`;
+    span.style.animationDelay    = `${i * 2.8}s`;
+    span.style.animationDuration = `${20 + i * 4}s`;
+    contentor.appendChild(span);
+  });
+}
+
+/**
+ * Função: iniciarSequenciaAbertura
+ * O que faz: configura o estado inicial e os listeners de avanço; mostra o primeiro bloco.
+ * Porquê: separa a configuração dos handlers da lógica de apresentação dos blocos.
+ */
+function iniciarSequenciaAbertura() {
+  _aberturaIndice     = 0;
+  _aberturaFinalizada = false;
+  document.getElementById('abertura-conteudo').innerHTML = '';
+
+  mostrarBlocoAbertura(0);
+
+  /**
+   * Handler de avanço da abertura — Space ou clique no ecrã.
+   * O que faz: avança para o bloco seguinte ou dispara o finale.
+   */
+  _aberturaListener = function(e) {
+    if (e.type === 'keydown' && e.code !== 'Space') return;
+    if (e.type === 'keydown') e.preventDefault();
+    if (_aberturaFinalizada) return;
+
+    _aberturaIndice++;
+    if (_aberturaIndice < BLOCOS_ABERTURA.length) {
+      mostrarBlocoAbertura(_aberturaIndice);
+    } else {
+      /* Todos os blocos revelados: desactiva listeners e mostra o finale */
+      _aberturaFinalizada = true;
+      document.getElementById('abertura').removeEventListener('click', _aberturaListener);
+      document.removeEventListener('keydown', _aberturaListener);
+      mostrarFinaleAbertura();
+    }
+  };
+
+  document.addEventListener('keydown', _aberturaListener);
+  document.getElementById('abertura').addEventListener('click', _aberturaListener);
+}
+
+/**
+ * Função: mostrarBlocoAbertura
+ * O que faz: substitui o conteúdo visível pelo bloco com índice dado, com fade in (800ms).
+ * Porquê: cada bloco é revelado de forma isolada para máximo impacto narrativo.
+ * @param {number} indice - índice do bloco em BLOCOS_ABERTURA
+ */
+function mostrarBlocoAbertura(indice) {
+  const conteudo = document.getElementById('abertura-conteudo');
+  conteudo.innerHTML = '';
+
+  const div       = document.createElement('div');
+  div.className   = 'abertura-bloco';
+  /* Usa innerHTML para suportar o HTML de destaque (span, em, strong) */
+  div.innerHTML   = BLOCOS_ABERTURA[indice].replace(/\n/g, '<br>');
+  div.style.opacity = '0';
+  conteudo.appendChild(div);
+
+  setTimeout(() => {
+    div.style.transition = 'opacity 0.8s ease';
+    div.style.opacity    = '1';
+  }, 50);
+}
+
+/**
+ * Função: mostrarFinaleAbertura
+ * O que faz: após 1500ms mostra o título ARQUIVO ZERO com glitch (2s),
+ *            depois dissolve a abertura e inicia a Cena 0.
+ * Porquê: o finale fecha a introdução com a identidade do jogo antes da acção começar.
+ */
+function mostrarFinaleAbertura() {
+  setTimeout(() => {
+    const conteudo = document.getElementById('abertura-conteudo');
+    conteudo.innerHTML = '';
+
+    const titulo       = document.createElement('div');
+    titulo.className   = 'abertura-titulo-final';
+    titulo.innerHTML   = 'ARQUIVO <span class="destaque-vermelho">ZERO</span>';
+    conteudo.appendChild(titulo);
+
+    /* Dispara o glitch e o sfx de alerta */
+    aplicarGlitch(titulo);
+    tocarSfx('system_alert');
+
+    /* Após 2s de título visível: dissolve e arranca a Cena 0 */
+    setTimeout(() => {
+      const abertura = document.getElementById('abertura');
+      abertura.style.transition = 'opacity 0.8s ease';
+      abertura.style.opacity    = '0';
+
+      /* Eleva o volume da música para o normal */
+      if (estadoJogo.musicaActual) {
+        const faixaIntro = estadoJogo.musicaActual;
+        const step       = (VOLUME_MUSICA - faixaIntro.volume) / 24;
+        const fi         = setInterval(() => {
+          if (faixaIntro.volume < VOLUME_MUSICA - step) {
+            faixaIntro.volume += step;
+          } else {
+            faixaIntro.volume = VOLUME_MUSICA;
+            clearInterval(fi);
+          }
+        }, 50);
+      }
+
+      setTimeout(() => {
+        abertura.classList.add('oculto');
+        abertura.style.opacity    = '';
+        abertura.style.transition = '';
+        /* Mostra o layout principal e arranca a Cena 0 */
+        document.getElementById('app').classList.remove('oculto');
+        carregarCena(0);
+      }, 800);
+    }, 2000);
+  }, 1500);
+}
+
+/* ============================================================
+   MODAL — DOCUMENTO PROJECTO MNEMÓSINE
+============================================================ */
+
+/**
+ * Função: abrirModalMnemosine
+ * O que faz: abre o overlay do modal, toca o alerta, e revela o documento progressivamente.
+ *            Quando o jogador clica em [FECHAR], executa o callback fornecido.
+ * Porquê: o modal separa a leitura do documento da progressão do diálogo.
+ * @param {Function} callbackAoFechar - chamada quando o jogador fecha o modal
+ */
+function abrirModalMnemosine(callbackAoFechar) {
+  const modal = document.getElementById('modal-mnemosine');
+  const corpo = document.getElementById('modal-corpo');
+  corpo.innerHTML = '';
+
+  modal.classList.remove('oculto');
+  modal.style.opacity = '0';
+  setTimeout(() => {
+    modal.style.transition = 'opacity 0.4s ease';
+    modal.style.opacity    = '1';
+  }, 50);
+
+  tocarSfx('system_alert');
+
+  /* Fase de desencriptação: 1.2s de indicador antes de revelar o conteúdo */
+  const indicador = document.createElement('div');
+  indicador.className   = 'modal-desencriptando';
+  indicador.textContent = 'DESENCRIPTANDO...';
+  corpo.appendChild(indicador);
+
+  setTimeout(() => {
+    corpo.innerHTML = '';
+    revelarBlocosMnemosine(corpo, 0);
+  }, 1200);
+
+  /* Handler do botão [FECHAR] */
+  const btnFechar = document.getElementById('modal-fechar-btn');
+  const handler   = () => {
+    modal.style.transition = 'opacity 0.3s ease';
+    modal.style.opacity    = '0';
+    setTimeout(() => {
+      modal.classList.add('oculto');
+      modal.style.opacity    = '';
+      modal.style.transition = '';
+      if (callbackAoFechar) callbackAoFechar();
+    }, 300);
+  };
+  btnFechar.addEventListener('click', handler, { once: true });
+}
+
+/**
+ * Função: revelarBlocosMnemosine
+ * O que faz: revela os blocos do documento DOCUMENTO_MNEMOSINE um a um, com 200ms de intervalo.
+ *            A linha de autorização surge 1500ms depois de todos os restantes.
+ * Porquê: a revelação progressiva simula a desencriptação em tempo real.
+ * @param {HTMLElement} corpo   - elemento contentor do documento
+ * @param {number}      indice  - índice do bloco actual
+ */
+function revelarBlocosMnemosine(corpo, indice) {
+  if (indice >= DOCUMENTO_MNEMOSINE.length) return;
+
+  const bloco = DOCUMENTO_MNEMOSINE[indice];
+  let   el;
+
+  switch (bloco.tipo) {
+    case 'titulo':
+      el = document.createElement('div');
+      el.className = 'modal-bloco modal-doc-titulo';
+      el.innerHTML = bloco.html;
+      break;
+    case 'sub':
+      el = document.createElement('div');
+      el.className = 'modal-bloco modal-doc-sub';
+      el.innerHTML = bloco.html;
+      break;
+    case 'divisor':
+      el = document.createElement('hr');
+      el.className = 'modal-bloco modal-doc-divisor';
+      break;
+    case 'secao':
+      el = document.createElement('div');
+      el.className = 'modal-bloco modal-doc-secao';
+      el.innerHTML = bloco.html;
+      break;
+    case 'item':
+      el = document.createElement('div');
+      el.className = 'modal-bloco modal-doc-lista-item';
+      el.innerHTML = bloco.html;
+      break;
+    case 'acesso':
+      el = document.createElement('div');
+      el.className = 'modal-bloco modal-doc-acesso-negado';
+      el.innerHTML = bloco.html;
+      break;
+    case 'autorizacao':
+      el = document.createElement('div');
+      el.className = 'modal-bloco modal-doc-autorizacao';
+      el.innerHTML = bloco.html;
+      /* Linha de autorização surge depois de uma pausa */
+      corpo.appendChild(el);
+      setTimeout(() => {
+        el.classList.add('visivel');
+        tocarSfx('puzzle_unlock');
+      }, 1500);
+      return; /* Não continua o loop normal */
+    default:
+      el = document.createElement('div');
+      el.className = 'modal-bloco';
+      el.innerHTML = bloco.html;
+  }
+
+  corpo.appendChild(el);
+  setTimeout(() => el.classList.add('visivel'), 30);
+
+  /* Avança para o bloco seguinte após 200ms */
+  setTimeout(() => revelarBlocosMnemosine(corpo, indice + 1), 200);
+}
+
+/* ============================================================
+   CRÉDITOS
+============================================================ */
+
+/**
+ * Função: mostrarCreditos
+ * O que faz: oculta o layout do jogo e mostra o ecrã de créditos com fade.
+ * Porquê: é o ecrã final após qualquer dos dois finais do jogo.
+ */
+function mostrarCreditos() {
+  const creditos = document.getElementById('ecra-creditos');
+  const app      = document.getElementById('app');
+  if (app) app.classList.add('oculto');
+
+  /* Para a música com fade */
+  if (estadoJogo.musicaActual) {
+    const ant  = estadoJogo.musicaActual;
+    const step = ant.volume / 24;
+    const fi   = setInterval(() => {
+      if (ant.volume > step) { ant.volume -= step; }
+      else { clearInterval(fi); ant.pause(); estadoJogo.musicaActual = null; }
+    }, 50);
+  }
+
+  creditos.classList.remove('oculto');
+  creditos.style.opacity    = '0';
+  creditos.style.transition = '';
+  setTimeout(() => {
+    creditos.style.transition = 'opacity 1s ease';
+    creditos.style.opacity    = '1';
+  }, 100);
+}
+
+/**
+ * Função: adicionarBotaoCreditos
+ * O que faz: injeta o botão [VER CRÉDITOS] num contentor de ecrã final.
+ * Porquê: aparece em ambos os finais, depois do texto de desenlace.
+ * @param {HTMLElement} contentor - elemento onde o botão é inserido
+ */
+function adicionarBotaoCreditos(contentor) {
+  const btn      = document.createElement('button');
+  btn.className  = 'btn-ver-creditos';
+  btn.textContent = '[ VER CRÉDITOS ]';
+  btn.addEventListener('click', () => mostrarCreditos(), { once: true });
+  contentor.appendChild(btn);
+}
+
+/* ============================================================
+   NAVEGAÇÃO GLOBAL — mudarEcra
+   Usada pelo painel dev e, internamente, sempre que for necessário
+   saltar para um ecrã sem passar pelo fluxo narrativo normal.
+============================================================ */
+
+/**
+ * Função: mudarEcra
+ * O que faz: navega para qualquer ecrã ou estado do jogo de forma segura,
+ *            encerrando o estado anterior (modal, música, listeners).
+ * Porquê: centraliza a navegação para o painel dev e para uso interno.
+ * @param {string} destino - 'abertura'|'cena-0'…'cena-3'|'final-a'|'final-b'|'creditos'
+ */
+function mudarEcra(destino) {
+  /* Fecha o modal se estiver aberto */
+  const modal = document.getElementById('modal-mnemosine');
+  if (modal && !modal.classList.contains('oculto')) {
+    modal.classList.add('oculto');
+    modal.style.opacity = '';
+  }
+
+  /* Oculta a abertura se estiver visível */
+  const abertura = document.getElementById('abertura');
+  if (abertura && !abertura.classList.contains('oculto')) {
+    abertura.classList.add('oculto');
+  }
+
+  /* Remove listeners da abertura se ainda activos */
+  if (_aberturaListener) {
+    document.removeEventListener('keydown', _aberturaListener);
+    if (abertura) abertura.removeEventListener('click', _aberturaListener);
+    _aberturaListener = null;
+  }
+
+  const app      = document.getElementById('app');
+  const creditos = document.getElementById('ecra-creditos');
+
+  switch (destino) {
+    case 'abertura':
+      if (app)      app.classList.add('oculto');
+      if (creditos) creditos.classList.add('oculto');
+      iniciarMusicaIntro();
+      mostrarAbertura();
+      break;
+
+    case 'creditos':
+      mostrarCreditos();
+      break;
+
+    case 'final-a':
+    case 'final-b': {
+      if (creditos) creditos.classList.add('oculto');
+      if (app)      app.classList.remove('oculto');
+
+      /* Para música actual antes de saltar */
+      if (estadoJogo.musicaActual) {
+        estadoJogo.musicaActual.pause();
+        estadoJogo.musicaActual = null;
+      }
+
+      /* Configura Cena 3 silenciosamente */
+      estadoJogo.fragmentosRecuperados = 3;
+      estadoJogo.cenaActual            = 3;
+      document.getElementById('indicador-no').textContent = 'NÓ-03';
+
+      document.querySelectorAll('.cena.cena-activa').forEach(c => {
+        c.classList.remove('cena-activa');
+        c.style.display = '';
+      });
+      const cena3 = document.getElementById('cena-3');
+      cena3.style.display = 'flex';
+      cena3.style.opacity = '1';
+      cena3.classList.add('cena-activa');
+
+      trocarMusica(3);
+
+      /* Oculta todos os sub-elementos da Cena 3 */
+      document.getElementById('cena3-painel-alcanena').classList.add('oculto');
+      document.getElementById('cena3-escolha-final').classList.add('oculto');
+      document.getElementById('cena3-final-a').classList.add('oculto');
+      document.getElementById('cena3-final-b').classList.add('oculto');
+      document.getElementById('btn-avancar-contentor').classList.add('oculto');
+      document.getElementById('contador-recuperados').textContent = 3;
+
+      setTimeout(() => {
+        if (destino === 'final-a') executarFinalA();
+        else executarFinalB();
+      }, 400);
+      break;
+    }
+
+    default: {
+      /* cena-0 a cena-3 */
+      const num = parseInt(destino.split('-')[1], 10);
+      if (isNaN(num) || num < 0 || num > 3) return;
+
+      if (creditos) creditos.classList.add('oculto');
+      if (app)      app.classList.remove('oculto');
+
+      /* Para música actual */
+      if (estadoJogo.musicaActual) {
+        estadoJogo.musicaActual.pause();
+        estadoJogo.musicaActual = null;
+      }
+
+      /* Para glitches de fundo da Cena 2 */
+      if (estadoJogo.cena2GlitchIntervalId) {
+        clearTimeout(estadoJogo.cena2GlitchIntervalId);
+        estadoJogo.cena2GlitchIntervalId = null;
+      }
+
+      /* Fragment counter: assume 1 por cena já passada */
+      estadoJogo.fragmentosRecuperados = Math.max(0, num - 1);
+
+      carregarCena(num);
+      break;
+    }
+  }
+}
+
+/* ============================================================
+   PAINEL DEV — Ctrl+Shift+D
+============================================================ */
+
+/**
+ * Função: inicializarPainelDev
+ * O que faz: activa o toggle Ctrl+Shift+D para mostrar/ocultar o painel de desenvolvimento.
+ * Porquê: o painel deve estar completamente oculto durante o jogo normal.
+ */
+function inicializarPainelDev() {
+  const painel = document.getElementById('painel-dev');
+  if (!painel) return;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.code === 'KeyD') {
+      e.preventDefault();
+      painel.classList.toggle('oculto');
+    }
+  });
+}
+
+/**
+ * Função: devReiniciarPuzzle
+ * O que faz: reinicia o puzzle da cena actual para o seu estado inicial.
+ * Porquê: permite testar o puzzle várias vezes durante a apresentação.
+ */
+function devReiniciarPuzzle() {
+  const cena = estadoJogo.cenaActual;
+  if (cena === 1) {
+    estadoJogo.puzzleCena1Resolvido = false;
+    const area = document.getElementById('cena1-puzzle-area');
+    if (area) {
+      area.classList.remove('oculto');
+      if (typeof iniciarPuzzleGilVicente === 'function') iniciarPuzzleGilVicente();
+    }
+  } else if (cena === 2) {
+    estadoJogo.puzzleCena2Resolvido = false;
+    const area = document.getElementById('cena2-puzzle-area');
+    if (area) {
+      area.classList.remove('oculto');
+      if (typeof iniciarPuzzlePessoa === 'function') iniciarPuzzlePessoa();
+    }
+  }
+}
+
+/**
+ * Função: devReiniciarCena
+ * O que faz: reinicia a cena actual desde o Beat 1 (diálogo e puzzle no estado inicial).
+ * Porquê: permite rever uma cena completa sem recarregar a página.
+ */
+function devReiniciarCena() {
+  /* Para diálogo e glitch em curso */
+  if (estadoJogo.dialogoIntervalId) {
+    clearInterval(estadoJogo.dialogoIntervalId);
+    estadoJogo.dialogoIntervalId = null;
+  }
+  if (estadoJogo.cena2GlitchIntervalId) {
+    clearTimeout(estadoJogo.cena2GlitchIntervalId);
+    estadoJogo.cena2GlitchIntervalId = null;
+  }
+  pararComentariosMarginais();
+
+  estadoJogo.dialogoSequencia = [];
+  estadoJogo.dialogoActual    = 0;
+  estadoJogo.dialogoCallback  = null;
+  estadoJogo.dialogoAEscrever = false;
+
+  iniciarBeatsCena(estadoJogo.cenaActual);
 }

@@ -1669,3 +1669,585 @@ html, body {
   white-space: nowrap;
   transition: opacity 0.3s;
 }
+
+/* ============================================================
+   20. ECRÃ DE INÍCIO — Atualizado com logos e licença
+============================================================ */
+.inicio-logo-vanguard {
+  font-size: 11px;
+  color: var(--cor-texto-dim);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(107,107,122,0.3);
+  display: inline-block;
+  padding: 6px 14px;
+}
+
+.inicio-rodape {
+  position: absolute;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.inicio-logos-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.logo-placeholder-pequeno {
+  font-size: 10px;
+  color: var(--cor-texto-dim);
+  border: 1px solid rgba(107,107,122,0.25);
+  padding: 5px 10px;
+  letter-spacing: 1px;
+}
+
+.inicio-licenca {
+  font-size: 10px;
+  color: var(--cor-texto-dim);
+  letter-spacing: 1px;
+}
+
+.licenca-link {
+  color: var(--cor-acento-cyan);
+  text-decoration: none;
+  opacity: 0.7;
+}
+.licenca-link:hover { opacity: 1; }
+
+/* ============================================================
+   21. ECRÃ FULLSCREEN — Base para abertura e créditos
+============================================================ */
+.ecra-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease;
+}
+
+/* ============================================================
+   22. ABERTURA — Sequência de introdução narrativa
+============================================================ */
+.abertura-fundo {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(5,5,16,0.7) 0%, rgba(10,10,26,0.65) 100%),
+    url('../images/scenes/cena0_arquivo_digital.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.35);
+  z-index: 0;
+}
+
+.abertura-fragmentos-fundo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.fragmento-flutuante {
+  position: absolute;
+  font-family: var(--fonte-literaria);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--cor-fragmento);
+  opacity: 0;
+  bottom: -40px;
+  animation: flutuar-fragmento linear infinite;
+  white-space: nowrap;
+}
+
+@keyframes flutuar-fragmento {
+  0%   { transform: translateY(0);      opacity: 0; }
+  10%  { opacity: 0.07; }
+  80%  { opacity: 0.07; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+.abertura-centro {
+  position: relative;
+  z-index: 2;
+  width: 680px;
+  max-width: 90vw;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+}
+
+.abertura-conteudo {
+  width: 100%;
+}
+
+.abertura-bloco {
+  font-family: var(--fonte-interface);
+  font-size: 17px;
+  color: var(--cor-texto);
+  line-height: 1.9;
+  transition: opacity 0.8s ease;
+}
+
+/* Destaque de "Arquivo Zero" e "ORPHEUS" no intro */
+.destaque-vermelho {
+  color: var(--cor-acento-vermelho);
+  text-shadow: 0 0 8px rgba(192,57,43,0.4);
+}
+
+/* Tríade do Bloco 4 */
+.intro-original {
+  font-family: var(--fonte-literaria);
+  font-style: italic;
+  color: var(--cor-fragmento);
+  font-size: 18px;
+}
+
+.intro-reescrito {
+  font-family: var(--fonte-interface);
+  font-style: normal;
+  font-weight: normal;
+  color: var(--cor-acento-vermelho);
+}
+
+/* Título final da abertura */
+.abertura-titulo-final {
+  font-family: var(--fonte-interface);
+  font-size: 52px;
+  letter-spacing: 10px;
+  color: var(--cor-texto);
+  text-shadow: 0 0 30px rgba(192,57,43,0.4);
+  animation: aparecer-log 0.5s ease-out;
+}
+
+.abertura-instrucao {
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--cor-texto-dim);
+  letter-spacing: 2px;
+  z-index: 2;
+  animation: piscar-instrucao 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   23. ECRÃ DE CRÉDITOS
+============================================================ */
+#ecra-creditos {
+  overflow-y: auto;
+  padding: 40px 20px;
+  justify-content: flex-start;
+}
+
+.creditos-conteudo {
+  max-width: 620px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+
+.creditos-texto {
+  font-family: var(--fonte-interface);
+  font-size: 15px;
+  color: var(--cor-texto);
+  line-height: 2;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.creditos-titulo {
+  font-size: 26px;
+  letter-spacing: 6px;
+}
+
+.creditos-zero {
+  color: var(--cor-acento-vermelho);
+}
+
+.creditos-logos-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.logo-placeholder {
+  font-size: 11px;
+  color: var(--cor-texto-dim);
+  border: 1px solid rgba(107,107,122,0.3);
+  padding: 10px 20px;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.creditos-licenca-bloco {
+  font-family: var(--fonte-interface);
+  font-size: 11px;
+  color: var(--cor-texto-dim);
+  text-align: center;
+  line-height: 1.9;
+  padding: 20px;
+  border: 1px solid rgba(107,107,122,0.2);
+  width: 100%;
+}
+
+.cc-icons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.cc-icon {
+  font-size: 10px;
+  border: 1px solid rgba(107,107,122,0.5);
+  padding: 3px 6px;
+  letter-spacing: 1px;
+  color: var(--cor-texto-dim);
+}
+
+.creditos-terceiros {
+  font-family: var(--fonte-interface);
+  font-size: 11px;
+  color: var(--cor-texto-dim);
+  line-height: 1.9;
+  width: 100%;
+  padding: 16px;
+  border-top: 1px solid rgba(107,107,122,0.2);
+}
+
+.creditos-terceiros-titulo {
+  color: var(--cor-texto);
+  letter-spacing: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Botão Ver Créditos nos ecrãs de fim */
+.btn-ver-creditos {
+  margin-top: 24px;
+  padding: 10px 22px;
+  background: transparent;
+  border: 1px solid var(--cor-texto-dim);
+  color: var(--cor-texto-dim);
+  font-family: var(--fonte-interface);
+  font-size: 12px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  animation: aparecer-log 1s ease-out;
+}
+
+.btn-ver-creditos:hover {
+  border-color: var(--cor-acento-cyan);
+  color: var(--cor-acento-cyan);
+}
+
+/* ============================================================
+   24. MODAL — DOCUMENTO PROJECTO MNEMÓSINE
+============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: rgba(5,5,14,0.88);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease;
+}
+
+.modal-panel {
+  width: 620px;
+  max-width: 92vw;
+  max-height: 85vh;
+  background: #080814;
+  border: 1px solid var(--cor-acento-vermelho);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-header-bar {
+  padding: 9px 16px;
+  background: rgba(192,57,43,0.12);
+  border-bottom: 1px solid rgba(192,57,43,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.modal-header-texto {
+  font-size: 11px;
+  color: var(--cor-acento-vermelho);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.modal-blink-indicador {
+  font-size: 10px;
+  color: var(--cor-acento-vermelho);
+  animation: piscar-cursor 0.8s step-end infinite;
+}
+
+/* Carimbo RESERVADO diagonal */
+.modal-stamp-reservado {
+  position: absolute;
+  top: 44px;
+  right: 18px;
+  font-size: 20px;
+  letter-spacing: 4px;
+  color: var(--cor-acento-vermelho);
+  border: 2px solid var(--cor-acento-vermelho);
+  padding: 3px 10px;
+  transform: rotate(-12deg);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.modal-corpo {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  font-family: var(--fonte-interface);
+  font-size: 12px;
+  color: var(--cor-texto);
+  line-height: 1.9;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(192,57,43,0.2) transparent;
+}
+
+/* Blocos de conteúdo do documento — revelados progressivamente */
+.modal-bloco {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  margin-bottom: 12px;
+}
+
+.modal-bloco.visivel { opacity: 1; }
+
+.modal-doc-titulo {
+  font-size: 15px;
+  color: var(--cor-texto);
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+}
+
+.modal-doc-sub,
+.modal-doc-classe {
+  font-size: 11px;
+  color: var(--cor-texto-dim);
+}
+
+.modal-doc-divisor {
+  border: none;
+  border-top: 1px solid rgba(232,232,224,0.15);
+  margin: 14px 0;
+}
+
+.modal-doc-secao {
+  font-size: 11px;
+  color: var(--cor-texto);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  margin-top: 14px;
+  border-bottom: 1px solid rgba(232,232,224,0.1);
+  padding-bottom: 4px;
+}
+
+.modal-doc-lista-item {
+  padding-left: 16px;
+  color: var(--cor-texto-dim);
+  margin-bottom: 2px;
+}
+
+.modal-doc-lista-item::before {
+  content: '· ';
+}
+
+.modal-doc-acesso-negado {
+  color: var(--cor-texto-dim);
+  font-size: 11px;
+  border: 1px solid rgba(192,57,43,0.2);
+  padding: 6px 12px;
+  margin: 14px 0;
+  text-align: center;
+}
+
+.modal-doc-autorizacao {
+  font-size: 12px;
+  color: var(--cor-texto);
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(232,232,224,0.15);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.modal-doc-autorizacao.visivel { opacity: 1; }
+
+/* Blocos redigidos ████ */
+.redacted {
+  background: rgba(30,0,0,0.6);
+  color: rgba(180,40,40,0.8);
+  border: 1px solid rgba(192,57,43,0.25);
+  padding: 0 3px;
+  cursor: not-allowed;
+  font-family: var(--fonte-interface);
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.redacted[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30,0,0,0.9);
+  border: 1px solid rgba(192,57,43,0.4);
+  color: var(--cor-acento-vermelho);
+  font-size: 9px;
+  padding: 2px 8px;
+  white-space: nowrap;
+  z-index: 999;
+  letter-spacing: 2px;
+}
+
+/* Estado de desencriptação em curso */
+.modal-desencriptando {
+  text-align: center;
+  color: var(--cor-acento-vermelho);
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 30px;
+  animation: piscar-instrucao 0.6s ease-in-out infinite;
+}
+
+.modal-fechar-contentor {
+  padding: 10px 16px;
+  border-top: 1px solid rgba(107,107,122,0.2);
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  background: rgba(0,0,0,0.3);
+}
+
+.modal-fechar-btn {
+  background: transparent;
+  border: 1px solid var(--cor-texto-dim);
+  color: var(--cor-texto-dim);
+  font-family: var(--fonte-interface);
+  font-size: 11px;
+  padding: 6px 16px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+
+.modal-fechar-btn:hover {
+  border-color: var(--cor-acento-cyan);
+  color: var(--cor-acento-cyan);
+}
+
+/* ============================================================
+   25. PAINEL DEV — Ctrl+Shift+D
+============================================================ */
+.painel-dev {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 9999;
+  background: rgba(4,4,12,0.97);
+  border: 1px dashed var(--cor-acento-cyan);
+  padding: 10px 12px;
+  min-width: 200px;
+  font-family: var(--fonte-interface);
+  box-shadow: 0 0 20px rgba(78,205,196,0.1);
+}
+
+.painel-dev-titulo {
+  font-size: 11px;
+  color: var(--cor-acento-cyan);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(78,205,196,0.2);
+}
+
+.painel-dev-secao {
+  font-size: 9px;
+  color: var(--cor-texto-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 8px 0 4px;
+}
+
+.painel-dev-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.btn-dev {
+  background: transparent;
+  border: 1px solid rgba(78,205,196,0.35);
+  color: var(--cor-acento-cyan);
+  font-family: var(--fonte-interface);
+  font-size: 10px;
+  padding: 3px 8px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.15s;
+}
+
+.btn-dev:hover {
+  background: rgba(78,205,196,0.08);
+  border-color: var(--cor-acento-cyan);
+}
+
+.btn-dev-vermelho {
+  border-color: rgba(192,57,43,0.5);
+  color: var(--cor-acento-vermelho);
+}
+
+.btn-dev-vermelho:hover {
+  background: rgba(192,57,43,0.08);
+  border-color: var(--cor-acento-vermelho);
+}
+
+.btn-dev-dim {
+  border-color: rgba(107,107,122,0.4);
+  color: var(--cor-texto-dim);
+}
+
+.btn-dev-dim:hover {
+  background: rgba(107,107,122,0.08);
+  border-color: var(--cor-texto-dim);
+}
