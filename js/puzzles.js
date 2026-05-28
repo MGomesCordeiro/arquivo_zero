@@ -10,46 +10,37 @@
 
 /* ============================================================
    DADOS DO PUZZLE — CENA 1: GIL VICENTE
-   Versos autênticos do Auto da Barca do Inferno (c. 1517)
-   que apresentam figuras de autoridade a serem julgadas.
-   A ordem correcta narra a chegada e o julgamento do Fidalgo.
+   Excertos autênticos do Auto da Barca do Inferno (c. 1517),
+   cena do Corregedor — figura de autoridade corrompida julgada
+   pelo Diabo à beira do rio.
+   A ordem correcta (B→C→A→D→E) reconstrói a cena completa.
 ============================================================ */
 const puzzleGilVicente = {
   fragmentos: [
     {
       id: 'gv1',
-      texto: 'Olá, barqueiro! Esperai!\nSou homem de grande estado.',
+      texto: 'CORREGEDOR — Hou da barca!\nDIABO — Quem está aí?\nCORREGEDOR — O Corregedor me chamam.\nDIABO — Oh, que precioso carregador!\nComo vindes vós, meu senhor,\nde feitos tão carregado!',
       ordemCorrecta: 1,
     },
     {
       id: 'gv2',
-      texto: 'Vem cá, entra nesta barca!\nSe não, bota-te na vala.',
+      texto: 'CORREGEDOR — E uma pessoa de estado\nir pera o Inferno...\nDIABO — Oh, juiz amado!\nE o dinheiro que ganhais\ncom as sentenças que dais?',
       ordemCorrecta: 2,
     },
     {
       id: 'gv3',
-      texto: 'Eu não entro em tal fragata.\nQue barqueiro tão grosseiro!',
+      texto: 'CORREGEDOR — Não tomei eu cá suborno!\nDIABO — E o coelho e o perdigão,\ne a perdiz, tudo na mão...\nCORREGEDOR — Isso dava-m\'o o escrivão!',
       ordemCorrecta: 3,
     },
     {
       id: 'gv4',
-      texto: 'A barca da Glória tarda,\nnem sei se virá cá ter.',
+      texto: 'DIABO — Dava-vo-lo por amor\nda senhora sua mulher,\npera vos fazer querer\no que ele bem quisesse.',
       ordemCorrecta: 4,
     },
     {
       id: 'gv5',
-      texto: 'As obras que tu fizeste\nNão merecem outro barco.',
+      texto: 'CORREGEDOR — Vós m\'os haveis de levar?\nDIABO — E no Inferno descarregar.\nEntrai, passaremos ora.\nCORREGEDOR — Non est de jure.\nDIABO — In hoc jure haveis de ir.',
       ordemCorrecta: 5,
-    },
-    {
-      id: 'gv6',
-      texto: 'Que poder tendes vós aqui?\nNão sabeis quem sou eu, não?',
-      ordemCorrecta: 6,
-    },
-    {
-      id: 'gv7',
-      texto: 'Tão pouco como na vida\nSe te pesava o alheio.',
-      ordemCorrecta: 7,
     },
   ],
   mensagemErrada_orpheus: 'Configuração inválida. A sequência não corresponde ao padrão narrativo registado.',
@@ -199,7 +190,7 @@ function iniciarPuzzleGilVicente() {
       <div class="puzzle-coluna-destino">
         <div class="puzzle-coluna-titulo">SEQUÊNCIA RESTAURADA</div>
         <div class="puzzle-zonas-lista" id="gv-zonas">
-          ${Array.from({ length: 7 }, (_, i) => renderizarZonaGV(i + 1)).join('')}
+          ${Array.from({ length: 5 }, (_, i) => renderizarZonaGV(i + 1)).join('')}
         </div>
       </div>
     </div>
@@ -245,7 +236,7 @@ function renderizarCartaoGV(fragmento) {
  * Função: renderizarZonaGV
  * O que faz: gera o HTML de uma zona de drop numerada.
  * Porquê: separa a renderização da lógica de validação.
- * @param {number} numero - número da zona (1 a 7)
+ * @param {number} numero - número da zona (1 a 5)
  * @returns {string} HTML da zona
  */
 function renderizarZonaGV(numero) {
