@@ -663,12 +663,14 @@ function abrirFragmentoCena0(contentor) {
     </div>
     <div class="fragmento-wrapper" id="fragmento-wrapper-0">
       <div class="texto-corrompido">
-        O clero é justo e sábio.<br>
-        A ordem é sagrada.
+        Eu não serei condenado.<br>
+        Um padre tão dedicado<br>
+        e tanto dado à virtude.
       </div>
       <div class="texto-fantasma">
-        O clero é ladrão e ignorante.<br>
-        Quem tem fome que reze.
+        Eu hei-de ser condenado?<br>
+        Um padre tão namorado<br>
+        e tanto dado à virtude!
       </div>
     </div>
     <button class="btn-restaurar" id="btn-restaurar-0">[ RESTAURAR FRAGMENTO ]</button>
