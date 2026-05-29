@@ -2617,3 +2617,13 @@ img[src*="logo_vanguard"] {
   color: var(--cor-texto-dim);
   font-style: italic;
 }
+
+/* Ressalva sobre o âmbito da licença CC nos créditos */
+.creditos-licenca-ressalva {
+  margin: 14px auto 0;
+  max-width: 540px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--cor-texto-dim);
+  font-style: italic;
+}
