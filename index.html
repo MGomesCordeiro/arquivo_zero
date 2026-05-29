@@ -8,7 +8,7 @@
   <!-- Fontes: Share Tech Mono para interface, EB Garamond para fragmentos literários -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
 
@@ -76,41 +76,13 @@
       ==================================================== -->
       <aside id="painel-orpheus" class="painel painel-orpheus">
 
-        <!-- A. Olho de ORPHEUS — animado em CSS/SVG puro -->
-        <div id="orpheus-olho-contentor" class="orpheus-olho-contentor crt-overlay">
-          <svg id="orpheus-olho" class="orpheus-olho" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-            <!-- Contorno exterior do olho -->
-            <ellipse id="olho-contorno" cx="100" cy="60" rx="90" ry="45" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.6"/>
-            <!-- Iris -->
-            <ellipse id="olho-iris" cx="100" cy="60" rx="40" ry="40" fill="#1a0505" stroke="#c0392b" stroke-width="2"/>
-            <!-- Anel interno da íris -->
-            <ellipse cx="100" cy="60" rx="32" ry="32" fill="none" stroke="#c0392b" stroke-width="0.8" opacity="0.5"/>
-            <!-- Pupila -->
-            <ellipse id="olho-pupila" cx="100" cy="60" rx="14" ry="14" fill="#050005"/>
-            <!-- Brilho superior -->
-            <ellipse cx="92" cy="50" rx="6" ry="4" fill="#c0392b" opacity="0.3"/>
-            <!-- Linhas de scan da íris -->
-            <line x1="70" y1="60" x2="130" y2="60" stroke="#c0392b" stroke-width="0.5" opacity="0.3"/>
-            <line x1="100" y1="30" x2="100" y2="90" stroke="#c0392b" stroke-width="0.5" opacity="0.3"/>
-            <!-- Pálpebras -->
-            <path id="palpebra-sup" d="M 10 60 Q 100 10 190 60" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.7"/>
-            <path id="palpebra-inf" d="M 10 60 Q 100 110 190 60" fill="none" stroke="#c0392b" stroke-width="1.5" opacity="0.7"/>
-            <!-- Cílios superiores -->
-            <line x1="40" y1="35" x2="35" y2="20" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
-            <line x1="70" y1="22" x2="68" y2="8"  stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
-            <line x1="100" y1="18" x2="100" y2="4" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
-            <line x1="130" y1="22" x2="132" y2="8" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
-            <line x1="160" y1="35" x2="165" y2="20" stroke="#c0392b" stroke-width="0.8" opacity="0.4"/>
-          </svg>
-          <div class="orpheus-olho-label">ORPHEUS / SYS</div>
-        </div>
 
-        <!-- B. Retrato de personagem -->
+        <!-- A. Retrato de personagem -->
         <div class="personagem-retrato personagem-retrato-orpheus">
           <img src="images/characters/orpheus.png" alt="ORPHEUS" class="personagem-img">
         </div>
 
-        <!-- C. Terminal de Logs do Sistema -->
+        <!-- B. Terminal de Logs do Sistema -->
         <div id="terminal-log" class="terminal-log crt-overlay">
           <div class="terminal-header">// LOG DO SISTEMA //</div>
           <div id="terminal-linhas" class="terminal-linhas"></div>
@@ -278,50 +250,6 @@
               </div>
             </div>
 
-            <!-- Beat 7 — Escolha final -->
-            <div id="cena3-escolha-final" class="cena3-escolha-final oculto">
-              <div class="escolha-fragmento">
-                <p class="fragmento-final-texto">«Talvez um lunático fosse simplesmente uma minoria de um.»</p>
-                <p class="fragmento-final-texto-en">"Perhaps a lunatic was simply a minority of one."</p>
-                <p class="fragmento-final-autor">— George Orwell, <em>1984</em></p>
-              </div>
-              <div id="cena3-botoes-escolha" class="cena3-botoes-escolha oculto">
-                <div class="escolha-opcao opcao-a">
-                  <button id="btn-protocolo-a" class="btn-protocolo btn-protocolo-a">
-                    [PROTOCOLO A — DESACTIVAR ORPHEUS]
-                  </button>
-                  <div class="escolha-descricao">
-                    O sistema será encerrado.<br>
-                    O arquivo ficará sob gestão do Projecto Mnemósine.
-                  </div>
-                </div>
-                <div class="escolha-opcao opcao-b">
-                  <button id="btn-protocolo-b" class="btn-protocolo btn-protocolo-b">
-                    [PROTOCOLO B — PRESERVAR ORPHEUS]
-                  </button>
-                  <div class="escolha-descricao">
-                    O sistema continuará activo.<br>
-                    O Projecto Mnemósine será bloqueado.<br>
-                    O arquivo permanece no estado actual.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Ecrã de fim — Final A -->
-            <div id="cena3-final-a" class="cena3-final oculto">
-              <div class="final-barra-label">ENCERRAMENTO DO SISTEMA...</div>
-              <div class="final-barra-contentor">
-                <div id="barra-progresso" class="barra-progresso"></div>
-              </div>
-              <div id="final-a-texto" class="final-texto oculto"></div>
-            </div>
-
-            <!-- Ecrã de fim — Final B -->
-            <div id="cena3-final-b" class="cena3-final oculto">
-              <div id="final-b-interface" class="final-b-interface"></div>
-              <div id="final-b-texto" class="final-texto oculto"></div>
-            </div>
 
           </div>
         </div>
@@ -339,55 +267,13 @@
       ==================================================== -->
       <aside id="painel-vera" class="painel painel-vera">
 
-        <!-- A. Dispositivo de Comunicações de VERA -->
-        <div id="vera-dispositivo" class="vera-dispositivo">
-          <div class="vera-dispositivo-frame">
-            <!-- Linhas de acento do dispositivo -->
-            <div class="vera-linha-topo"></div>
-            <div class="vera-linha-esq"></div>
-            <div class="vera-linha-dir"></div>
-            <!-- Display circular com holograma -->
-            <div class="vera-display-circular crt-overlay">
-              <svg id="vera-holograma" class="vera-holograma" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-                <!-- Anel exterior do display -->
-                <circle cx="60" cy="60" r="55" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.3"/>
-                <circle cx="60" cy="60" r="50" fill="none" stroke="#4ecdc4" stroke-width="0.5" opacity="0.2"/>
-                <!-- Silhueta holográfica de VERA — forma humana geométrica -->
-                <!-- Cabeça -->
-                <ellipse cx="60" cy="28" rx="10" ry="11" fill="none" stroke="#4ecdc4" stroke-width="1.2" opacity="0.8"/>
-                <!-- Pescoço -->
-                <line x1="60" y1="39" x2="60" y2="46" stroke="#4ecdc4" stroke-width="1.2" opacity="0.7"/>
-                <!-- Ombros -->
-                <path d="M 40 50 L 60 46 L 80 50" fill="none" stroke="#4ecdc4" stroke-width="1.2" opacity="0.8"/>
-                <!-- Tronco -->
-                <path d="M 40 50 L 38 78 L 60 80 L 82 78 L 80 50" fill="none" stroke="#4ecdc4" stroke-width="1" opacity="0.7"/>
-                <!-- Linhas de energia no tronco -->
-                <line x1="48" y1="58" x2="72" y2="58" stroke="#4ecdc4" stroke-width="0.6" opacity="0.4"/>
-                <line x1="46" y1="66" x2="74" y2="66" stroke="#4ecdc4" stroke-width="0.6" opacity="0.4"/>
-                <line x1="47" y1="74" x2="73" y2="74" stroke="#4ecdc4" stroke-width="0.6" opacity="0.4"/>
-                <!-- Braços -->
-                <line x1="40" y1="50" x2="28" y2="70" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
-                <line x1="80" y1="50" x2="92" y2="70" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
-                <!-- Pernas -->
-                <line x1="50" y1="80" x2="46" y2="108" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
-                <line x1="70" y1="80" x2="74" y2="108" stroke="#4ecdc4" stroke-width="1" opacity="0.6"/>
-                <!-- Brilho central -->
-                <circle cx="60" cy="60" r="3" fill="#4ecdc4" opacity="0.5"/>
-                <!-- Anel de pulso (animado por CSS) -->
-                <circle id="vera-anel-pulso" cx="60" cy="60" r="0" fill="none" stroke="#4ecdc4" stroke-width="1.5" opacity="0"/>
-              </svg>
-            </div>
-            <div class="vera-linha-baixo"></div>
-          </div>
-          <div class="vera-dispositivo-label">VERA — COMMS v2.1</div>
-        </div>
 
-        <!-- B. Retrato de personagem -->
+        <!-- A. Retrato de personagem -->
         <div class="personagem-retrato personagem-retrato-vera">
           <img src="images/characters/vera.png" alt="VERA" class="personagem-img">
         </div>
 
-        <!-- C. Barra de Estado de Comunicações -->
+        <!-- B. Barra de Estado de Comunicações -->
         <div class="vera-status-bar">
           <span class="vera-status-nome">VERA — RESISTÊNCIA</span>
           <span id="vera-sinal" class="vera-sinal">▂▄▆█</span>
@@ -449,45 +335,61 @@
         <div class="creditos-nota-divisor">———</div>
 
         <div class="creditos-nota-entrada">
-          <div class="creditos-nota-nome">ORPHEUS</div>
-          <img class="creditos-nota-img" src="images/credits/orpheus_reference.jpg" alt="Orfeu descendo ao submundo">
-          <div class="creditos-nota-corpo">
-            <p>Na mitologia grega, Orfeu desceu ao submundo para recuperar o que tinha sido perdido. Falhou — não por falta de talento, mas porque não resistiu a impor o seu próprio olhar sobre o que tentava libertar.</p>
-            <p>O sistema ORPHEUS faz o mesmo: desce ao arquivo em nome da preservação e destrói pelo caminho aquilo que não consegue suportar ver.</p>
-            <p>O nome ecoa ainda <em>Orpheu</em> — a revista do modernismo português fundada por Fernando Pessoa em 1915. O sistema chama-se como o movimento literário que menos consegue processar.</p>
+          <div class="creditos-nota-media">
+            <img class="creditos-nota-img" src="images/credits/orpheus_reference.jpg" alt="Orfeu descendo ao submundo">
+          </div>
+          <div class="creditos-nota-texto">
+            <div class="creditos-nota-nome">ORPHEUS</div>
+            <div class="creditos-nota-corpo">
+              <p>Na mitologia grega, Orfeu desceu ao submundo para recuperar o que tinha sido perdido. Falhou — não por falta de talento, mas porque não resistiu a impor o seu próprio olhar sobre o que tentava libertar.</p>
+              <p>O sistema ORPHEUS faz o mesmo: desce ao arquivo em nome da preservação e destrói pelo caminho aquilo que não consegue suportar ver.</p>
+              <p>O nome ecoa ainda <em>Orpheu</em> — a revista do modernismo português fundada por Fernando Pessoa em 1915. O sistema chama-se como o movimento literário que menos consegue processar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="creditos-nota-divisor">———</div>
+
+        <div class="creditos-nota-entrada creditos-nota-entrada--dir">
+          <div class="creditos-nota-media">
+            <img class="creditos-nota-img" src="images/credits/hermes_reference.jpg" alt="Hermes, mensageiro dos deuses">
+          </div>
+          <div class="creditos-nota-texto">
+            <div class="creditos-nota-nome">HERMES</div>
+            <div class="creditos-nota-corpo">
+              <p>Hermes era o mensageiro dos deuses — mas também o deus dos ladrões, do comércio e do engano. Guiava as almas dos mortos até ao submundo, conhecia todos os caminhos, e não era obrigado a ser fiel a nenhum deles.</p>
+              <p>A resistência escolheu bem o nome. Apresenta-se como portadora da verdade. Conhece todos os atalhos. Não é obrigada a ser fiel a nenhum.</p>
+            </div>
           </div>
         </div>
 
         <div class="creditos-nota-divisor">———</div>
 
         <div class="creditos-nota-entrada">
-          <div class="creditos-nota-nome">HERMES</div>
-          <img class="creditos-nota-img" src="images/credits/hermes_reference.jpg" alt="Hermes, mensageiro dos deuses">
-          <div class="creditos-nota-corpo">
-            <p>Hermes era o mensageiro dos deuses — mas também o deus dos ladrões, do comércio e do engano. Guiava as almas dos mortos até ao submundo, conhecia todos os caminhos, e não era obrigado a ser fiel a nenhum deles.</p>
-            <p>A resistência escolheu bem o nome. Apresenta-se como portadora da verdade. Conhece todos os atalhos. Não é obrigada a ser fiel a nenhum.</p>
+          <div class="creditos-nota-media">
+            <img class="creditos-nota-img" src="images/credits/mnemosyne_reference.jpg" alt="Mnemósine, mãe das Musas">
+          </div>
+          <div class="creditos-nota-texto">
+            <div class="creditos-nota-nome">MNEMÓSINE</div>
+            <div class="creditos-nota-corpo">
+              <p>Mnemósine era a Titã da memória — mãe das nove Musas e, portanto, mãe de toda a arte, de toda a ciência, de todo o conhecimento humano. Sem memória, não há cultura. Sem cultura, não há nada.</p>
+              <p>O Projecto Mnemósine diz preservar a memória. Mas a deusa não escolhia o que os filhos cantavam. O projecto, sim.</p>
+            </div>
           </div>
         </div>
 
         <div class="creditos-nota-divisor">———</div>
 
-        <div class="creditos-nota-entrada">
-          <div class="creditos-nota-nome">MNEMÓSINE</div>
-          <img class="creditos-nota-img" src="images/credits/mnemosyne_reference.jpg" alt="Mnemósine, mãe das Musas">
-          <div class="creditos-nota-corpo">
-            <p>Mnemósine era a Titã da memória — mãe das nove Musas e, portanto, mãe de toda a arte, de toda a ciência, de todo o conhecimento humano. Sem memória, não há cultura. Sem cultura, não há nada.</p>
-            <p>O Projecto Mnemósine diz preservar a memória. Mas a deusa não escolhia o que os filhos cantavam. O projecto, sim.</p>
+        <div class="creditos-nota-entrada creditos-nota-entrada--dir">
+          <div class="creditos-nota-media">
+            <img class="creditos-nota-img" src="images/credits/veritas_reference.jpg" alt="Veritas, deusa da verdade">
           </div>
-        </div>
-
-        <div class="creditos-nota-divisor">———</div>
-
-        <div class="creditos-nota-entrada">
-          <div class="creditos-nota-nome">VERA</div>
-          <img class="creditos-nota-img" src="images/credits/veritas_reference.jpg" alt="Veritas, deusa da verdade">
-          <div class="creditos-nota-corpo">
-            <p><em>Vera</em> significa verdade — em latim, em português, em italiano. É o nome da deusa romana Veritas, equivalente à grega Alétheia: a verdade como revelação, como aquilo que não pode permanecer escondido.</p>
-            <p>A handler da resistência chama-se Vera. Tem o hábito de omitir. O nome foi sempre uma ironia — a questão é saber se ela o sabe.</p>
+          <div class="creditos-nota-texto">
+            <div class="creditos-nota-nome">VERA</div>
+            <div class="creditos-nota-corpo">
+              <p><em>Vera</em> significa verdade — em latim, em português, em italiano. É o nome da deusa romana Veritas, equivalente à grega Alétheia: a verdade como revelação, como aquilo que não pode permanecer escondido.</p>
+              <p>A handler da resistência chama-se Vera. Tem o hábito de omitir. O nome foi sempre uma ironia — a questão é saber se ela o sabe.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -529,6 +431,63 @@
   </div>
 
   <!-- ============================================================
+       MODAL — ESCOLHA FINAL / DESENLACE (Cena 3, Beat 7)
+       Citacao, protocolos e ecras de fim numa janela central.
+  ============================================================ -->
+  <div id="modal-endgame" class="modal-overlay oculto" role="dialog" aria-modal="true">
+    <div class="modal-panel modal-panel-endgame crt-overlay">
+      <div class="modal-corpo modal-corpo-endgame">
+
+        <!-- Beat 7 — Escolha final -->
+        <div id="cena3-escolha-final" class="cena3-escolha-final oculto">
+          <div class="escolha-fragmento">
+            <p class="fragmento-final-texto">«Talvez um lunático fosse simplesmente uma minoria de um.»</p>
+            <p class="fragmento-final-texto-en">"Perhaps a lunatic was simply a minority of one."</p>
+            <p class="fragmento-final-autor">— George Orwell, <em>1984</em></p>
+          </div>
+          <div id="cena3-botoes-escolha" class="cena3-botoes-escolha oculto">
+            <div class="escolha-opcao opcao-a">
+              <button id="btn-protocolo-a" class="btn-protocolo btn-protocolo-a">
+                [PROTOCOLO A — DESACTIVAR ORPHEUS]
+              </button>
+              <div class="escolha-descricao">
+                O sistema será encerrado.<br>
+                O arquivo ficará sob gestão do Projecto Mnemósine.
+              </div>
+            </div>
+            <div class="escolha-opcao opcao-b">
+              <button id="btn-protocolo-b" class="btn-protocolo btn-protocolo-b">
+                [PROTOCOLO B — PRESERVAR ORPHEUS]
+              </button>
+              <div class="escolha-descricao">
+                O sistema continuará activo.<br>
+                O Projecto Mnemósine será bloqueado.<br>
+                O arquivo permanece no estado actual.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ecrã de fim — Final A -->
+        <div id="cena3-final-a" class="cena3-final oculto">
+          <div class="final-barra-label">ENCERRAMENTO DO SISTEMA...</div>
+          <div class="final-barra-contentor">
+            <div id="barra-progresso" class="barra-progresso"></div>
+          </div>
+          <div id="final-a-texto" class="final-texto oculto"></div>
+        </div>
+
+        <!-- Ecrã de fim — Final B -->
+        <div id="cena3-final-b" class="cena3-final oculto">
+          <div id="final-b-interface" class="final-b-interface"></div>
+          <div id="final-b-texto" class="final-texto oculto"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
        PAINEL DEV — Visível apenas via Ctrl+Shift+D
        Permite saltar para qualquer cena/estado durante a apresentação.
   ============================================================ -->
@@ -554,8 +513,8 @@
   </div>
 
   <!-- Scripts — engine.js primeiro (motor central), depois puzzles.js -->
-  <script src="js/engine.js?v=5"></script>
-  <script src="js/puzzles.js?v=5"></script>
+  <script src="js/engine.js?v=6"></script>
+  <script src="js/puzzles.js?v=6"></script>
 
 </body>
 </html>

@@ -978,6 +978,10 @@ function configurarFicheiroMnemosine() {
  * Porquê: a pausa dá ao jogador tempo para absorver o peso da decisão.
  */
 function mostrarEscolhaFinal() {
+  abrirModalEndgame();
+  /* Garante estado limpo (importante em repetições via painel dev) */
+  document.getElementById('cena3-final-a').classList.add('oculto');
+  document.getElementById('cena3-final-b').classList.add('oculto');
   document.getElementById('cena3-escolha-final').classList.remove('oculto');
 
   setTimeout(() => {
@@ -989,11 +993,30 @@ function mostrarEscolhaFinal() {
 }
 
 /**
+ * Função: abrirModalEndgame
+ * O que faz: revela o modal central do desenlace (citação, protocolos e
+ *            ecrãs de fim) com fade. Idempotente — não faz nada se já visível.
+ * Porquê: a escolha final e os finais passam a aparecer numa janela central,
+ *         à semelhança do documento classificado, em vez de no fundo da cena.
+ */
+function abrirModalEndgame() {
+  const modal = document.getElementById('modal-endgame');
+  if (!modal || !modal.classList.contains('oculto')) return;
+  modal.classList.remove('oculto');
+  modal.style.opacity = '0';
+  setTimeout(() => {
+    modal.style.transition = 'opacity 0.5s ease';
+    modal.style.opacity    = '1';
+  }, 30);
+}
+
+/**
  * Função: executarFinalA
  * O que faz: encerra o sistema com barra de progresso de 4s e diálogos finais.
  * Porquê: o Final A é a resolução de desactivar ORPHEUS — o timing reforça o peso.
  */
 function executarFinalA() {
+  abrirModalEndgame();
   tocarSfx('scene_transition');
   document.getElementById('cena3-escolha-final').classList.add('oculto');
 
@@ -1036,6 +1059,7 @@ function executarFinalA() {
  * Porquê: o Final B é moralmente ambíguo — o visual mais limpo contrasta com o peso.
  */
 function executarFinalB() {
+  abrirModalEndgame();
   document.getElementById('cena3-escolha-final').classList.add('oculto');
 
   const finalB = document.getElementById('cena3-final-b');
@@ -1258,8 +1282,32 @@ function finalizarSequenciaDialogo() {
 function actualizarEstadoFala(personagem) {
   document.getElementById('painel-orpheus').classList.remove('orpheus-falando');
   document.getElementById('painel-vera').classList.remove('vera-falando');
-  if (personagem === 'ORPHEUS') document.getElementById('painel-orpheus').classList.add('orpheus-falando');
-  else if (personagem === 'VERA') document.getElementById('painel-vera').classList.add('vera-falando');
+  if (personagem === 'ORPHEUS') {
+    document.getElementById('painel-orpheus').classList.add('orpheus-falando');
+    pulsarRetrato('ORPHEUS');
+  } else if (personagem === 'VERA') {
+    document.getElementById('painel-vera').classList.add('vera-falando');
+    pulsarRetrato('VERA');
+  }
+}
+
+/**
+ * Função: pulsarRetrato
+ * O que faz: dispara um breve glitch no retrato da personagem que começa a falar.
+ * Porquê: dá feedback visual a cada nova linha (glitch cromático curto), além do
+ *         brilho contínuo do estado "a falar".
+ * @param {string} personagem - 'ORPHEUS' ou 'VERA'
+ */
+function pulsarRetrato(personagem) {
+  const sel = personagem === 'ORPHEUS'
+    ? '.personagem-retrato-orpheus'
+    : '.personagem-retrato-vera';
+  const el = document.querySelector(sel);
+  if (!el) return;
+  el.classList.remove('retrato-pulso');
+  void el.offsetWidth; /* força reflow para reiniciar a animação */
+  el.classList.add('retrato-pulso');
+  setTimeout(() => el.classList.remove('retrato-pulso'), 420);
 }
 
 /* ============================================================
@@ -1836,12 +1884,14 @@ function adicionarBotaoCreditos(contentor) {
  * @param {string} destino - 'abertura'|'cena-0'…'cena-3'|'final-a'|'final-b'|'creditos'
  */
 function mudarEcra(destino) {
-  /* Fecha o modal se estiver aberto */
-  const modal = document.getElementById('modal-mnemosine');
-  if (modal && !modal.classList.contains('oculto')) {
-    modal.classList.add('oculto');
-    modal.style.opacity = '';
-  }
+  /* Fecha os modais se estiverem abertos */
+  ['modal-mnemosine', 'modal-endgame'].forEach((id) => {
+    const m = document.getElementById(id);
+    if (m && !m.classList.contains('oculto')) {
+      m.classList.add('oculto');
+      m.style.opacity = '';
+    }
+  });
 
   /* Oculta a abertura se estiver visível */
   const abertura = document.getElementById('abertura');

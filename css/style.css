@@ -2261,38 +2261,49 @@ html, body {
    SECÇÃO 26 — LOGOS, IMAGENS DE PERSONAGENS, CC E NOTAS
 ============================================================ */
 
-/* --- Logos no ecrã de início --- */
+/* --- Logos no ecrã de início ---
+   Fundo branco (cartão) para garantir legibilidade: os logos têm letras
+   escuras (escola azul, ministério preto, vanguard azul-claro/preto) e
+   seriam invisíveis sobre o fundo escuro do jogo. */
 .inicio-logo-vanguard {
-  max-height: 56px;
-  max-width: 220px;
+  max-height: 92px;
+  max-width: 320px;
   width: auto;
   object-fit: contain;
-  margin-bottom: 24px;
-  /* Fundo ligeiro para logos com letras escuras (ex.: ministério) */
-  background: rgba(255,255,255,0.10);
-  padding: 6px 12px;
-  border-radius: 3px;
+  margin-bottom: 26px;
+  background: rgba(255,255,255,0.93);
+  padding: 12px 22px;
+  border-radius: 5px;
+}
+
+.inicio-logos-row,
+.creditos-logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
 }
 
 .logo-img-pequeno {
-  max-height: 32px;
-  max-width: 100px;
+  max-height: 60px;
+  max-width: 180px;
   width: auto;
   object-fit: contain;
-  background: rgba(255,255,255,0.10);
-  padding: 4px 8px;
-  border-radius: 2px;
+  background: rgba(255,255,255,0.93);
+  padding: 9px 16px;
+  border-radius: 5px;
 }
 
 /* --- Logos no ecrã de créditos --- */
 .logo-img {
-  max-height: 52px;
-  max-width: 140px;
+  max-height: 88px;
+  max-width: 230px;
   width: auto;
   object-fit: contain;
-  background: rgba(255,255,255,0.10);
-  padding: 6px 12px;
-  border-radius: 3px;
+  background: rgba(255,255,255,0.93);
+  padding: 11px 20px;
+  border-radius: 5px;
 }
 
 /* --- Imagem Creative Commons --- */
@@ -2306,33 +2317,134 @@ html, body {
   opacity: 0.8;
 }
 
-/* --- Retratos de personagem nos painéis laterais --- */
+/* --- Retratos de personagem nos painéis laterais ---
+   Substituem o olho SVG (ORPHEUS) e o holograma SVG (VERA). São o
+   elemento visual principal de cada personagem e reagem à fala. */
 .personagem-retrato {
   width: 100%;
+  height: 220px;
+  position: relative;      /* contexto para ::before (tom) e ::after (flash) */
   overflow: hidden;
   flex-shrink: 0;
-  line-height: 0; /* remove gap abaixo da img */
+  line-height: 0;
 }
 
 .personagem-img {
   width: 100%;
-  max-height: 150px;
+  height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 18%;
   display: block;
-  opacity: 0.72;
+  opacity: 0.82;
+  position: relative;
+  z-index: 0;
 }
 
-.personagem-retrato-orpheus .personagem-img {
-  /* Tom avermelhado subtil para ORPHEUS */
-  filter: brightness(0.72) contrast(1.15) sepia(0.25) hue-rotate(-15deg);
-  border-bottom: 1px solid rgba(192,57,43,0.35);
+/* Tom de cor por personagem — overlay que não toca no filtro da imagem,
+   deixando a animação de glitch livre para usar drop-shadow cromático. */
+.personagem-retrato::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+}
+.personagem-retrato-orpheus::before {
+  background: linear-gradient(180deg, rgba(192,57,43,0.05), rgba(192,57,43,0.55));
+}
+.personagem-retrato-vera::before {
+  background: linear-gradient(180deg, rgba(78,205,196,0.04), rgba(78,205,196,0.5));
+}
+.personagem-retrato-orpheus { border-bottom: 1px solid rgba(192,57,43,0.4); }
+.personagem-retrato-vera    { border-bottom: 1px solid rgba(78,205,196,0.4); }
+
+/* Camada de flash (usada no "freak out" de ORPHEUS) */
+.personagem-retrato::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
 }
 
-.personagem-retrato-vera .personagem-img {
-  /* Tom esverdeado/ciano subtil para VERA */
-  filter: brightness(0.72) contrast(1.1) sepia(0.15) hue-rotate(155deg);
-  border-bottom: 1px solid rgba(78,205,196,0.35);
+/* ---- Estado FALANDO: brilho pulsante persistente enquanto a linha é escrita ---- */
+@keyframes falando-glow-orpheus {
+  0%, 100% { box-shadow: inset 0 0 16px rgba(192,57,43,0.25); }
+  50%      { box-shadow: inset 0 0 34px rgba(192,57,43,0.6); }
+}
+.orpheus-falando .personagem-retrato-orpheus {
+  animation: falando-glow-orpheus 1.1s ease-in-out infinite;
+}
+.orpheus-falando .personagem-retrato-orpheus .personagem-img { opacity: 1; }
+
+@keyframes falando-glow-vera {
+  0%, 100% { box-shadow: inset 0 0 16px rgba(78,205,196,0.22); }
+  50%      { box-shadow: inset 0 0 32px rgba(78,205,196,0.55); }
+}
+.vera-falando .personagem-retrato-vera {
+  animation: falando-glow-vera 1.1s ease-in-out infinite;
+}
+.vera-falando .personagem-retrato-vera .personagem-img { opacity: 1; }
+
+/* ---- Pulso de GLITCH a cada nova linha (classe adicionada por JS) ---- */
+@keyframes glitch-retrato-orpheus {
+  0%, 100% { transform: translate(0,0); filter: none; }
+  20% { transform: translate(-3px,1px); filter: drop-shadow(3px 0 rgba(192,57,43,0.9)) drop-shadow(-2px 0 rgba(78,205,196,0.5)); }
+  40% { transform: translate(3px,-1px); filter: drop-shadow(-3px 0 rgba(192,57,43,0.85)); }
+  60% { transform: translate(-2px,0);  filter: drop-shadow(2px 0 rgba(192,57,43,0.7)); }
+  80% { transform: translate(2px,1px); filter: none; }
+}
+.personagem-retrato-orpheus.retrato-pulso .personagem-img {
+  animation: glitch-retrato-orpheus 0.4s steps(2, end);
+}
+
+@keyframes glitch-retrato-vera {
+  0%, 100% { transform: translate(0,0); filter: none; }
+  25% { transform: translate(-2px,1px); filter: drop-shadow(2px 0 rgba(78,205,196,0.85)) drop-shadow(-2px 0 rgba(192,57,43,0.4)); }
+  50% { transform: translate(2px,-1px); filter: drop-shadow(-2px 0 rgba(78,205,196,0.7)); }
+  75% { transform: translate(-1px,0);  filter: none; }
+}
+.personagem-retrato-vera.retrato-pulso .personagem-img {
+  animation: glitch-retrato-vera 0.35s steps(2, end);
+}
+
+/* ---- FREAK OUT de ORPHEUS (classe orpheus-fragmentando, 800ms) ----
+   Tremor forte da moldura, glitch repetido da imagem e flash de luz vermelha. */
+@keyframes freakout-shake {
+  0%, 100% { transform: translate(0,0) rotate(0); }
+  10% { transform: translate(-6px,3px) rotate(-1deg); }
+  20% { transform: translate(6px,-3px) rotate(1deg); }
+  30% { transform: translate(-7px,-2px) rotate(-1.2deg); }
+  40% { transform: translate(7px,2px) rotate(1.2deg); }
+  50% { transform: translate(-5px,4px) rotate(-0.8deg); }
+  60% { transform: translate(5px,-4px) rotate(0.8deg); }
+  70% { transform: translate(-6px,2px) rotate(-1deg); }
+  80% { transform: translate(6px,-2px) rotate(1deg); }
+  90% { transform: translate(-3px,1px) rotate(-0.5deg); }
+}
+@keyframes freakout-red-flash {
+  0%   { opacity: 0; }
+  15%  { opacity: 0.85; }
+  30%  { opacity: 0.2; }
+  45%  { opacity: 0.8; }
+  60%  { opacity: 0.15; }
+  80%  { opacity: 0.6; }
+  100% { opacity: 0; }
+}
+.orpheus-fragmentando .personagem-retrato-orpheus {
+  animation: freakout-shake 0.8s linear;
+  z-index: 5;
+}
+.orpheus-fragmentando .personagem-retrato-orpheus::after {
+  background: radial-gradient(circle at center, rgba(192,57,43,0.75), rgba(192,57,43,0.15));
+  mix-blend-mode: screen;
+  animation: freakout-red-flash 0.8s steps(8, end);
+}
+.orpheus-fragmentando .personagem-retrato-orpheus .personagem-img {
+  animation: glitch-retrato-orpheus 0.2s steps(2, end) infinite;
 }
 
 /* --- Citação final — linha em inglês --- */
@@ -2379,28 +2491,44 @@ html, body {
   letter-spacing: 4px;
 }
 
+/* Cada entrada: imagem ao lado do texto. As entradas marcadas com
+   --dir invertem o lado (imagem à direita), criando ritmo alternado. */
 .creditos-nota-entrada {
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+  flex-wrap: wrap;
   margin-bottom: 8px;
+}
+.creditos-nota-entrada--dir {
+  flex-direction: row-reverse;
+}
+
+.creditos-nota-media {
+  flex: 0 0 220px;
+  max-width: 220px;
+}
+
+/* Imagem completa, sem corte */
+.creditos-nota-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.92;
+  border: 1px solid rgba(107,107,122,0.25);
+}
+
+.creditos-nota-texto {
+  flex: 1 1 280px;
+  min-width: 240px;
 }
 
 .creditos-nota-nome {
   font-family: var(--fonte-interface);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 3px;
   color: var(--cor-acento-vermelho);
   margin-bottom: 12px;
-}
-
-.creditos-nota-img {
-  width: 100%;
-  max-height: 220px;
-  object-fit: cover;
-  object-position: center 20%;
-  display: block;
-  margin-bottom: 16px;
-  opacity: 0.82;
-  border: 1px solid rgba(107,107,122,0.25);
-  filter: brightness(0.85) contrast(1.05);
 }
 
 .creditos-nota-corpo p {
@@ -2415,4 +2543,42 @@ html, body {
   font-style: italic;
   color: var(--cor-acento-cyan);
   opacity: 1;
+}
+
+/* ============================================================
+   SECÇÃO 27 — MODAL DE ESCOLHA FINAL / DESENLACE
+   Apresenta a citação, os protocolos e os ecrãs de fim numa
+   janela central (como o documento classificado), evitando
+   que o conteúdo apareça no fundo do ecrã com necessidade de scroll.
+============================================================ */
+.modal-panel-endgame {
+  width: 680px;
+  max-width: 92vw;
+  max-height: 88vh;
+  border-color: var(--cor-acento-cyan);
+}
+
+.modal-corpo-endgame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 24px;
+  gap: 28px;
+  text-align: center;
+}
+
+/* Dentro do modal, as secções não precisam de crescer (flex:1) nem de
+   ocupar o ecrã inteiro como faziam quando estavam na cena. */
+.modal-corpo-endgame .cena3-escolha-final,
+.modal-corpo-endgame .cena3-final {
+  flex: none;
+  width: 100%;
+  padding: 0;
+  gap: 26px;
+}
+
+/* Botões de protocolo lado a lado, com quebra em ecrãs estreitos */
+.modal-corpo-endgame .cena3-botoes-escolha {
+  flex-wrap: wrap;
 }
