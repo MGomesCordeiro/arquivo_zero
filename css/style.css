@@ -2256,3 +2256,163 @@ html, body {
   background: rgba(107,107,122,0.08);
   border-color: var(--cor-texto-dim);
 }
+
+/* ============================================================
+   SECÇÃO 26 — LOGOS, IMAGENS DE PERSONAGENS, CC E NOTAS
+============================================================ */
+
+/* --- Logos no ecrã de início --- */
+.inicio-logo-vanguard {
+  max-height: 56px;
+  max-width: 220px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 24px;
+  /* Fundo ligeiro para logos com letras escuras (ex.: ministério) */
+  background: rgba(255,255,255,0.10);
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+
+.logo-img-pequeno {
+  max-height: 32px;
+  max-width: 100px;
+  width: auto;
+  object-fit: contain;
+  background: rgba(255,255,255,0.10);
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+/* --- Logos no ecrã de créditos --- */
+.logo-img {
+  max-height: 52px;
+  max-width: 140px;
+  width: auto;
+  object-fit: contain;
+  background: rgba(255,255,255,0.10);
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+
+/* --- Imagem Creative Commons --- */
+.cc-img {
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin: 8px auto 0;
+  /* Inverte para visibilidade em fundo escuro (ícones pretos → brancos) */
+  filter: invert(0.88) brightness(1.1);
+  opacity: 0.8;
+}
+
+/* --- Retratos de personagem nos painéis laterais --- */
+.personagem-retrato {
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  line-height: 0; /* remove gap abaixo da img */
+}
+
+.personagem-img {
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  opacity: 0.72;
+}
+
+.personagem-retrato-orpheus .personagem-img {
+  /* Tom avermelhado subtil para ORPHEUS */
+  filter: brightness(0.72) contrast(1.15) sepia(0.25) hue-rotate(-15deg);
+  border-bottom: 1px solid rgba(192,57,43,0.35);
+}
+
+.personagem-retrato-vera .personagem-img {
+  /* Tom esverdeado/ciano subtil para VERA */
+  filter: brightness(0.72) contrast(1.1) sepia(0.15) hue-rotate(155deg);
+  border-bottom: 1px solid rgba(78,205,196,0.35);
+}
+
+/* --- Citação final — linha em inglês --- */
+.fragmento-final-texto-en {
+  font-family: var(--fonte-literaria);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--cor-texto-dim);
+  margin: 4px 0 0;
+  opacity: 0.75;
+}
+
+/* --- Secção "Notas sobre os nomes" nos créditos --- */
+.creditos-notas-nomes {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(107,107,122,0.3);
+  text-align: left;
+}
+
+.creditos-notas-secao-titulo {
+  font-family: var(--fonte-interface);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--cor-acento-cyan);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.creditos-notas-intro {
+  font-size: 13px;
+  color: var(--cor-texto-dim);
+  text-align: center;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.creditos-nota-divisor {
+  text-align: center;
+  color: var(--cor-texto-dim);
+  opacity: 0.4;
+  margin: 28px 0;
+  font-size: 12px;
+  letter-spacing: 4px;
+}
+
+.creditos-nota-entrada {
+  margin-bottom: 8px;
+}
+
+.creditos-nota-nome {
+  font-family: var(--fonte-interface);
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--cor-acento-vermelho);
+  margin-bottom: 12px;
+}
+
+.creditos-nota-img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  margin-bottom: 16px;
+  opacity: 0.82;
+  border: 1px solid rgba(107,107,122,0.25);
+  filter: brightness(0.85) contrast(1.05);
+}
+
+.creditos-nota-corpo p {
+  font-size: 13px;
+  color: var(--cor-texto);
+  line-height: 1.7;
+  margin: 0 0 10px;
+  opacity: 0.88;
+}
+
+.creditos-nota-corpo p em {
+  font-style: italic;
+  color: var(--cor-acento-cyan);
+  opacity: 1;
+}

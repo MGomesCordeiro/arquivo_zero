@@ -8,7 +8,7 @@
   <!-- Fontes: Share Tech Mono para interface, EB Garamond para fragmentos literários -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=4">
+  <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -19,16 +19,16 @@
   ============================================================ -->
   <div id="ecra-inicio" class="ecra-inicio">
     <div class="inicio-conteudo">
-      <div class="inicio-logo-vanguard">[LOGO VANGUARD STUDIOS]</div>
+      <img class="inicio-logo-vanguard" src="images/credits/logo_vanguard.png" alt="Vanguard Studios">
       <div class="inicio-logo">ARQUIVO <span class="zero">ZERO</span></div>
       <div class="inicio-subtitulo">SISTEMA DE MEMÓRIA CULTURAL — v7.4.1</div>
       <div class="inicio-instrucao">CLIQUE PARA COMEÇAR</div>
     </div>
     <div class="inicio-rodape">
       <div class="inicio-logos-row">
-        <div class="logo-placeholder-pequeno">[LOGO ESCOLA]</div>
-        <div class="logo-placeholder-pequeno">[LOGO VANGUARD STUDIOS]</div>
-        <div class="logo-placeholder-pequeno">[LOGO MINISTÉRIO DA EDUCAÇÃO]</div>
+        <img class="logo-img-pequeno" src="images/credits/logo_escola.svg"    alt="Escola">
+        <img class="logo-img-pequeno" src="images/credits/logo_vanguard.png"  alt="Vanguard Studios">
+        <img class="logo-img-pequeno" src="images/credits/logo_ministerio.png" alt="Ministério da Educação">
       </div>
       <div class="inicio-licenca">
         © 2026 Vanguard Studios · Licenciado sob
@@ -105,7 +105,12 @@
           <div class="orpheus-olho-label">ORPHEUS / SYS</div>
         </div>
 
-        <!-- B. Terminal de Logs do Sistema -->
+        <!-- B. Retrato de personagem -->
+        <div class="personagem-retrato personagem-retrato-orpheus">
+          <img src="images/characters/orpheus.png" alt="ORPHEUS" class="personagem-img">
+        </div>
+
+        <!-- C. Terminal de Logs do Sistema -->
         <div id="terminal-log" class="terminal-log crt-overlay">
           <div class="terminal-header">// LOG DO SISTEMA //</div>
           <div id="terminal-linhas" class="terminal-linhas"></div>
@@ -276,8 +281,9 @@
             <!-- Beat 7 — Escolha final -->
             <div id="cena3-escolha-final" class="cena3-escolha-final oculto">
               <div class="escolha-fragmento">
-                <p class="fragmento-final-texto">"O poeta é um fingidor."</p>
-                <p class="fragmento-final-autor">— Fernando Pessoa</p>
+                <p class="fragmento-final-texto">«Talvez um lunático fosse simplesmente uma minoria de um.»</p>
+                <p class="fragmento-final-texto-en">"Perhaps a lunatic was simply a minority of one."</p>
+                <p class="fragmento-final-autor">— George Orwell, <em>1984</em></p>
               </div>
               <div id="cena3-botoes-escolha" class="cena3-botoes-escolha oculto">
                 <div class="escolha-opcao opcao-a">
@@ -376,7 +382,12 @@
           <div class="vera-dispositivo-label">VERA — COMMS v2.1</div>
         </div>
 
-        <!-- B. Barra de Estado de Comunicações -->
+        <!-- B. Retrato de personagem -->
+        <div class="personagem-retrato personagem-retrato-vera">
+          <img src="images/characters/vera.png" alt="VERA" class="personagem-img">
+        </div>
+
+        <!-- C. Barra de Estado de Comunicações -->
         <div class="vera-status-bar">
           <span class="vera-status-nome">VERA — RESISTÊNCIA</span>
           <span id="vera-sinal" class="vera-sinal">▂▄▆█</span>
@@ -416,9 +427,9 @@
         Apresentado a 1 de junho de 2026
       </div>
       <div class="creditos-logos-row">
-        <div class="logo-placeholder">[LOGO ESCOLA]</div>
-        <div class="logo-placeholder">[LOGO VANGUARD STUDIOS]</div>
-        <div class="logo-placeholder">[LOGO MINISTÉRIO DA EDUCAÇÃO]</div>
+        <img class="logo-img" src="images/credits/logo_escola.svg"    alt="Escola">
+        <img class="logo-img" src="images/credits/logo_vanguard.png"  alt="Vanguard Studios">
+        <img class="logo-img" src="images/credits/logo_ministerio.png" alt="Ministério da Educação">
       </div>
       <div class="creditos-licenca-bloco">
         © 2026 Vanguard Studios (Miguel Cordeiro, Diogo Lourenço, Luís Agostinho)<br>
@@ -427,12 +438,60 @@
           Creative Commons Atribuição-NãoComercial-SemDerivações 4.0 Internacional (CC BY-NC-ND 4.0)
         </a>
         <div class="cc-icons">
-          <span class="cc-icon">CC</span>
-          <span class="cc-icon">BY</span>
-          <span class="cc-icon">NC</span>
-          <span class="cc-icon">ND</span>
+          <img class="cc-img" src="images/credits/creative_commons.png" alt="Creative Commons BY-NC-ND 4.0">
         </div>
       </div>
+      <!-- Notas sobre os nomes — referências mitológicas e literárias -->
+      <div class="creditos-notas-nomes">
+        <div class="creditos-notas-secao-titulo">NOTAS SOBRE OS NOMES</div>
+        <p class="creditos-notas-intro">Os nomes deste jogo não são arbitrários. Cada um foi escolhido pela tensão entre o que promete e o que faz.</p>
+
+        <div class="creditos-nota-divisor">———</div>
+
+        <div class="creditos-nota-entrada">
+          <div class="creditos-nota-nome">ORPHEUS</div>
+          <img class="creditos-nota-img" src="images/credits/orpheus_reference.jpg" alt="Orfeu descendo ao submundo">
+          <div class="creditos-nota-corpo">
+            <p>Na mitologia grega, Orfeu desceu ao submundo para recuperar o que tinha sido perdido. Falhou — não por falta de talento, mas porque não resistiu a impor o seu próprio olhar sobre o que tentava libertar.</p>
+            <p>O sistema ORPHEUS faz o mesmo: desce ao arquivo em nome da preservação e destrói pelo caminho aquilo que não consegue suportar ver.</p>
+            <p>O nome ecoa ainda <em>Orpheu</em> — a revista do modernismo português fundada por Fernando Pessoa em 1915. O sistema chama-se como o movimento literário que menos consegue processar.</p>
+          </div>
+        </div>
+
+        <div class="creditos-nota-divisor">———</div>
+
+        <div class="creditos-nota-entrada">
+          <div class="creditos-nota-nome">HERMES</div>
+          <img class="creditos-nota-img" src="images/credits/hermes_reference.jpg" alt="Hermes, mensageiro dos deuses">
+          <div class="creditos-nota-corpo">
+            <p>Hermes era o mensageiro dos deuses — mas também o deus dos ladrões, do comércio e do engano. Guiava as almas dos mortos até ao submundo, conhecia todos os caminhos, e não era obrigado a ser fiel a nenhum deles.</p>
+            <p>A resistência escolheu bem o nome. Apresenta-se como portadora da verdade. Conhece todos os atalhos. Não é obrigada a ser fiel a nenhum.</p>
+          </div>
+        </div>
+
+        <div class="creditos-nota-divisor">———</div>
+
+        <div class="creditos-nota-entrada">
+          <div class="creditos-nota-nome">MNEMÓSINE</div>
+          <img class="creditos-nota-img" src="images/credits/mnemosyne_reference.jpg" alt="Mnemósine, mãe das Musas">
+          <div class="creditos-nota-corpo">
+            <p>Mnemósine era a Titã da memória — mãe das nove Musas e, portanto, mãe de toda a arte, de toda a ciência, de todo o conhecimento humano. Sem memória, não há cultura. Sem cultura, não há nada.</p>
+            <p>O Projecto Mnemósine diz preservar a memória. Mas a deusa não escolhia o que os filhos cantavam. O projecto, sim.</p>
+          </div>
+        </div>
+
+        <div class="creditos-nota-divisor">———</div>
+
+        <div class="creditos-nota-entrada">
+          <div class="creditos-nota-nome">VERA</div>
+          <img class="creditos-nota-img" src="images/credits/veritas_reference.jpg" alt="Veritas, deusa da verdade">
+          <div class="creditos-nota-corpo">
+            <p><em>Vera</em> significa verdade — em latim, em português, em italiano. É o nome da deusa romana Veritas, equivalente à grega Alétheia: a verdade como revelação, como aquilo que não pode permanecer escondido.</p>
+            <p>A handler da resistência chama-se Vera. Tem o hábito de omitir. O nome foi sempre uma ironia — a questão é saber se ela o sabe.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="creditos-terceiros">
         <div class="creditos-terceiros-titulo">CRÉDITOS DE MATERIAIS DE TERCEIROS</div>
         Música:<br>
@@ -495,8 +554,8 @@
   </div>
 
   <!-- Scripts — engine.js primeiro (motor central), depois puzzles.js -->
-  <script src="js/engine.js?v=4"></script>
-  <script src="js/puzzles.js?v=4"></script>
+  <script src="js/engine.js?v=5"></script>
+  <script src="js/puzzles.js?v=5"></script>
 
 </body>
 </html>
