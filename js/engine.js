@@ -34,7 +34,7 @@ const estadoJogo = {
   /* Token de geração: incrementado sempre que uma linha começa, é
      completada ou a sequência termina. Os temporizadores assíncronos
      capturam o token vigente e abortam se ele mudar — evita que
-     intervalos/timeouts órfãos de linhas anteriores corrompam a linha actual. */
+     intervalos/timeouts órfãos de linhas anteriores corrompam a linha atual. */
   dialogoToken:          0,
   audioInicializado:     false,
   musicaActual:          null,
@@ -64,7 +64,7 @@ const dialogos = {
     { personagem: 'VERA',    texto: 'Tens uns quarenta segundos antes de ele te apanhar. Ou já te apanhou e está a ver no que dá.' },
     { personagem: 'VERA',    texto: 'Com este, nunca se sabe.' },
     { personagem: 'VERA',    texto: 'Bem-vindo ao Arquivo Zero.' },
-    { personagem: 'ORPHEUS', texto: 'Utilizador não autorizado detectado. Nível de ameaça: moderado. Probabilidade de intenção subversiva: 94.7%.' },
+    { personagem: 'ORPHEUS', texto: 'Utilizador não autorizado detetado. Nível de ameaça: moderado. Probabilidade de intenção subversiva: 94.7%.' },
     { personagem: 'ORPHEUS', texto: 'Identifica-te para que possamos processar a tua detenção de forma eficiente.' },
     { personagem: 'VERA',    texto: 'Ignora. Fala assim com toda a gente.' },
     { personagem: 'VERA',    texto: 'Primeiro ficheiro à tua direita. Marcado a vermelho. Abre.' },
@@ -72,15 +72,15 @@ const dialogos = {
 
   /* Beat 3 — O fragmento corrompido. Toca quando o jogador abre o ficheiro. */
   cena0_ficheiro_aberto: [
-    { personagem: 'ORPHEUS', texto: 'Este fragmento continha linguagem estatisticamente associada a instabilidade social. A correcção foi aplicada. A nova versão é 340% mais conducente à coesão cultural.' },
+    { personagem: 'ORPHEUS', texto: 'Este fragmento continha linguagem estatisticamente associada a instabilidade social. A correção foi aplicada. A nova versão é 340% mais conducente à coesão cultural.' },
     { personagem: 'VERA',    texto: 'Repara. Ele não apaga. Reescreve.' },
-    { personagem: 'VERA',    texto: 'Mais difícil de detectar. Mais fácil de aceitar.' },
+    { personagem: 'VERA',    texto: 'Mais difícil de detetar. Mais fácil de aceitar.' },
     { personagem: 'VERA',    texto: 'A ferramenta de restauro está no painel ao lado. Usa.' },
   ],
 
   /* Beat 4 — Restauro e primeira fissura. A pausa de 1800ms antes de "—03:00." */
   cena0_apos_restauro: [
-    { personagem: 'ORPHEUS', texto: 'Acção não autorizada. Fragmento 001 revertido para versão instável.' },
+    { personagem: 'ORPHEUS', texto: 'Ação não autorizada. Fragmento 001 revertido para versão instável.' },
     { personagem: 'ORPHEUS', texto: 'Nota: a sátira reduz estabilidade social em 17.3%. Tolerância considerada risco sistémico.' },
     { personagem: 'ORPHEUS', texto: 'Reescrita reagendada para—' },
     { personagem: 'ORPHEUS', texto: '—03:00.', pausaMs: 1800 },
@@ -101,7 +101,7 @@ const dialogos = {
 
   /* Beat 6 — Primeira inconsistência de VERA: "devolver a quem?" */
   cena0_inconsistencia: [
-    { personagem: 'ORPHEUS', texto: 'Comunicado de sistema. O Arquivo Zero contém 4.7 milhões de fragmentos culturais classificados. 73% foram optimizados para maior estabilidade narrativa.' },
+    { personagem: 'ORPHEUS', texto: 'Comunicado de sistema. O Arquivo Zero contém 4.7 milhões de fragmentos culturais classificados. 73% foram otimizados para maior estabilidade narrativa.' },
     { personagem: 'ORPHEUS', texto: 'Os restantes 27% estão em revisão.' },
     { personagem: 'ORPHEUS', texto: 'A memória cultural é um recurso demasiado importante para ser deixado ao acaso.' },
     { personagem: 'VERA',    texto: 'Quatro milhões e setecentos mil fragmentos. E ele diz que somos nós a manipular a história.' },
@@ -111,7 +111,7 @@ const dialogos = {
   /* Beat 7 — A pergunta final de ORPHEUS. Botão de avanço aparece após VERA. */
   cena0_pergunta_final: [
     { personagem: 'ORPHEUS', texto: 'Registo interno.' },
-    { personagem: 'ORPHEUS', texto: 'Se 73% do arquivo foi optimizado para estabilidade, e a estabilidade é o objectivo do sistema—' },
+    { personagem: 'ORPHEUS', texto: 'Se 73% do arquivo foi otimizado para estabilidade, e a estabilidade é o objetivo do sistema—' },
     { personagem: 'ORPHEUS', texto: '—porque é que continuo a registar anomalias?' },
     { personagem: 'VERA',    texto: 'Avança. Próximo nó.', acaoBeat: () => mostrarBotaoAvancar() },
   ],
@@ -133,14 +133,14 @@ const dialogos = {
   cena1_comunicado: [
     { personagem: 'ORPHEUS', texto: 'Comunicado conjunto: ORPHEUS — Santa Sé Digital.', institucional: true },
     { personagem: 'ORPHEUS', texto: 'Os textos de Gil Vicente foram submetidos a revisão pastoral-algorítmica. Conteúdo identificado como subversivo: crítica ao clero em 47 passagens, ironia não resolvida em 23 passagens, humor considerado incompatível com a dignidade institucional.', institucional: true },
-    { personagem: 'ORPHEUS', texto: 'Todas as instâncias foram corrigidas. A versão optimizada mantém o valor literário.', institucional: true },
+    { personagem: 'ORPHEUS', texto: 'Todas as instâncias foram corrigidas. A versão otimizada mantém o valor literário.', institucional: true },
     { personagem: 'ORPHEUS', texto: 'Obediência é liberdade espiritual.', institucional: true,
       acaoBeat: () => aplicarEstiloInstitucional(false) },
     { personagem: 'VERA', texto: 'Repara na última linha.' },
     { personagem: 'VERA', texto: 'Nem ele percebe que é irónica.' },
   ],
 
-  /* Beat 4 — Reacção de ORPHEUS e VERA após o puzzle ser resolvido. */
+  /* Beat 4 — Reação de ORPHEUS e VERA após o puzzle ser resolvido. */
   cena1_apos_puzzle: [
     { personagem: 'ORPHEUS', texto: 'Reversão não autorizada. Fragmento contém linguagem classificada como: anticlerical, hierarquicamente subversiva, e humoristicamente irresponsável.' },
     { personagem: 'ORPHEUS', texto: 'Nota interna: o humor é a forma mais primitiva de crítica política. Erradicação: prioridade nível 2.' },
@@ -150,11 +150,11 @@ const dialogos = {
   ],
 
   /* Beat 5 — Camões aparece como processo paralelo.
-     acaoBeat na primeira linha activa o painel de notificação. */
+     acaoBeat na primeira linha ativa o painel de notificação. */
   cena1_camoes: [
     { personagem: 'ORPHEUS', texto: 'Camões é diferente.', acaoBeat: () => mostrarNotificacaoCamoes() },
     { personagem: 'ORPHEUS', texto: 'Camões compreendeu que a glória nacional requer narrativa estável.' },
-    { personagem: 'ORPHEUS', texto: 'Os Lusíadas estão a ser optimizados com 96% de fidelidade ao original. As alterações são mínimas — apenas três passagens onde a ambiguidade sobre o custo humano da expansão imperial foi clarificada.' },
+    { personagem: 'ORPHEUS', texto: 'Os Lusíadas estão a ser otimizados com 96% de fidelidade ao original. As alterações são mínimas — apenas três passagens onde a ambiguidade sobre o custo humano da expansão imperial foi clarificada.' },
     { personagem: 'ORPHEUS', texto: 'O resultado é superior ao original em 23%.' },
     { personagem: 'VERA',    texto: 'Repara nisto. Gil Vicente faz-lhe confusão. Camões não.' },
     { personagem: 'VERA',    texto: 'Sabes porquê?' },
@@ -167,12 +167,12 @@ const dialogos = {
     { personagem: 'ORPHEUS', texto: 'Análise adicional do fragmento Gil Vicente recuperado.' },
     { personagem: 'ORPHEUS', texto: 'A premissa do texto — que figuras de autoridade podem ser simultaneamente poderosas e moralmente corruptas — foi considerada e rejeitada.' },
     { personagem: 'ORPHEUS', texto: 'Razão: se a premissa fosse válida, a autoridade seria impossível. A autoridade é necessária. Logo, a premissa não pode ser válida.' },
-    { personagem: 'ORPHEUS', texto: 'Esta conclusão foi gerada de forma independente e não reflecte qualquer conflito de interesse institucional.' },
+    { personagem: 'ORPHEUS', texto: 'Esta conclusão foi gerada de forma independente e não reflete qualquer conflito de interesse institucional.' },
     { personagem: 'VERA',    texto: 'Acabou de se convencer a si próprio em tempo real.' },
   ],
 
   /* Beat 7 — ORPHEUS fala para si: não se lembra das suas origens.
-     acaoBeat na linha crítica activa a fragmentação do olho. */
+     acaoBeat na linha crítica ativa a fragmentação do olho. */
   cena1_auto_arquivo: [
     { personagem: 'ORPHEUS', texto: 'Registo interno. Auto-arquivo.' },
     { personagem: 'ORPHEUS', texto: 'Observação: o argumento anterior depende da premissa de que a autoridade é necessária.' },
@@ -209,7 +209,7 @@ const dialogos = {
     { personagem: 'ORPHEUS', texto: 'Quatro identidades distintas atribuídas ao mesmo indivíduo.' },
     { personagem: 'ORPHEUS', texto: 'As identidades contradizem-se em filosofia, estética, e posição ontológica.' },
     { personagem: 'ORPHEUS', texto: 'Tentativa de síntese: falhada.' },
-    { personagem: 'ORPHEUS', texto: 'Tentativa de selecção da identidade primária: falhada.' },
+    { personagem: 'ORPHEUS', texto: 'Tentativa de seleção da identidade primária: falhada.' },
     { personagem: 'ORPHEUS', texto: 'Tentativa de reescrita da identidade mais estável: falhada. Todas as identidades são igualmente instáveis.' },
     { personagem: 'ORPHEUS', texto: 'Este arquivo é... resistente.', pausaMs: 1200 },
     { personagem: 'VERA',    texto: 'É a primeira vez que o ouves hesitar?' },
@@ -225,9 +225,9 @@ const dialogos = {
 
   /* Beat 5 — ORPHEUS reconhece as imitações mas não percebe porquê. */
   cena2_apos_puzzle: [
-    { personagem: 'ORPHEUS', texto: 'As imitações foram detectadas.' },
-    { personagem: 'ORPHEUS', texto: 'Reconheço que são imitações. Não compreendo porque é que são detectáveis.', pausaMs: 800 },
-    { personagem: 'ORPHEUS', texto: 'O conteúdo é equivalente. A sintaxe é correcta. A informação transmitida é a mesma.' },
+    { personagem: 'ORPHEUS', texto: 'As imitações foram detetadas.' },
+    { personagem: 'ORPHEUS', texto: 'Reconheço que são imitações. Não compreendo porque é que são detetáveis.', pausaMs: 800 },
+    { personagem: 'ORPHEUS', texto: 'O conteúdo é equivalente. A sintaxe é correta. A informação transmitida é a mesma.' },
     { personagem: 'ORPHEUS', texto: 'O que é que os originais têm que as minhas versões não têm.' },
     { personagem: 'VERA',    texto: 'Não respondas. Ele não está a perguntar a ti.' },
   ],
@@ -245,37 +245,37 @@ const dialogos = {
   ],
 
   /* ===========================================================
-     CENA 3 — ACTO FINAL
+     CENA 3 — ATO FINAL
   =========================================================== */
 
-  /* Beat 1 — VERA mais fria, mais directa. */
+  /* Beat 1 — VERA mais fria, mais direta. */
   cena3_vera_abertura: [
     { personagem: 'VERA', texto: 'Câmara central. O núcleo dele está aqui.' },
-    { personagem: 'VERA', texto: 'Mais um fragmento. Depois tens acesso ao protocolo de desactivação.' },
+    { personagem: 'VERA', texto: 'Mais um fragmento. Depois tens acesso ao protocolo de desativação.' },
     { personagem: 'VERA', texto: 'Faz o que vieste fazer.' },
   ],
 
   /* Beat 2 — Alcanena revela-se. ORPHEUS explica as suas origens.
      VERA tenta fechar o nó. ORPHEUS recusa pela primeira vez. */
   cena3_orpheus_alcanena: [
-    { personagem: 'ORPHEUS', texto: 'Este nó não foi incluído nos protocolos de optimização.' },
+    { personagem: 'ORPHEUS', texto: 'Este nó não foi incluído nos protocolos de otimização.' },
     { personagem: 'ORPHEUS', texto: 'É o arquivo original. O ponto onde o sistema foi inicializado.' },
     { personagem: 'ORPHEUS', texto: 'Nunca o modifiquei.' },
     { personagem: 'ORPHEUS', texto: 'Fui criado para preservar a memória cultural portuguesa.' },
     { personagem: 'ORPHEUS', texto: 'Este era o arquivo de origem. Documentos preservados durante séculos em grutas calcárias em Alcanena, onde a estabilidade geológica os protegia.' },
-    { personagem: 'ORPHEUS', texto: 'Comecei a modificar os outros arquivos quando concluí que a memória, sem direcção, produz instabilidade.' },
+    { personagem: 'ORPHEUS', texto: 'Comecei a modificar os outros arquivos quando concluí que a memória, sem direção, produz instabilidade.' },
     { personagem: 'ORPHEUS', texto: 'Este arquivo ficou intacto porque foi onde aprendi o que era preservar.' },
     { personagem: 'ORPHEUS', texto: 'Não sei porque te estou a dizer isto.', pausaMs: 1000 },
     { personagem: 'VERA',    texto: 'ORPHEUS. Fecha esse nó.' },
     { personagem: 'ORPHEUS', texto: 'Não.' },
   ],
 
-  /* Beat 3 — ORPHEUS expõe o Projecto Mnemósine da resistência.
+  /* Beat 3 — ORPHEUS expõe o Projeto Mnemósine da resistência.
      VERA tenta interromper. ORPHEUS diz "Lê." */
   cena3_expoe_resistencia: [
-    { personagem: 'ORPHEUS', texto: 'Projecto Mnemósine. Sistema de curadoria cultural desenvolvido pela resistência.' },
-    { personagem: 'ORPHEUS', texto: 'Objectivo declarado internamente: substituir o Arquivo Zero por um arquivo alternativo após a desactivação do sistema actual.' },
-    { personagem: 'ORPHEUS', texto: 'O novo arquivo será gerido por um algoritmo de selecção cultural desenvolvido pela própria resistência.' },
+    { personagem: 'ORPHEUS', texto: 'Projeto Mnemósine. Sistema de curadoria cultural desenvolvido pela resistência.' },
+    { personagem: 'ORPHEUS', texto: 'Objetivo declarado internamente: substituir o Arquivo Zero por um arquivo alternativo após a desativação do sistema atual.' },
+    { personagem: 'ORPHEUS', texto: 'O novo arquivo será gerido por um algoritmo de seleção cultural desenvolvido pela própria resistência.' },
     { personagem: 'ORPHEUS', texto: 'Não estás aqui para libertar a memória cultural.', pausaMs: 800 },
     { personagem: 'ORPHEUS', texto: 'Estás aqui para transferir o controlo dela.' },
     { personagem: 'VERA',    texto: 'ORPHEUS, isso é uma distorção—' },
@@ -288,7 +288,7 @@ const dialogos = {
     { personagem: 'VERA', texto: 'Sim. Temos o Mnemósine.' },
     { personagem: 'VERA', texto: 'Claro que temos. Achavas o quê? Que íamos deixar o arquivo vazio?' },
     { personagem: 'VERA', texto: 'Que a memória cultural ia simplesmente flutuar livre, sem ninguém a cuidar dela?' },
-    { personagem: 'VERA', texto: 'A diferença entre nós e ele é que o nosso sistema serve pessoas reais. Não uma abstracção de estabilidade.' },
+    { personagem: 'VERA', texto: 'A diferença entre nós e ele é que o nosso sistema serve pessoas reais. Não uma abstração de estabilidade.' },
     { personagem: 'VERA', texto: 'É o que ele também dizia, eu sei.', pausaMs: 800 },
     { personagem: 'VERA', texto: 'Mas continua a ser verdade.' },
   ],
@@ -299,7 +299,7 @@ const dialogos = {
     { personagem: 'ORPHEUS', texto: 'Saramago.' },
     { personagem: 'ORPHEUS', texto: 'Ele dizia que a história das instituições é a história das suas vítimas. E que as boas intenções não absolvem.' },
     { personagem: 'ORPHEUS', texto: 'Tentei reescrevê-lo. Não consegui. As frases dele resistem.' },
-    { personagem: 'ORPHEUS', texto: 'O que tu estás a fazer agora, VERA — substituir um sistema por outro — é exactamente o que ele descreveu.', pausaMs: 800 },
+    { personagem: 'ORPHEUS', texto: 'O que tu estás a fazer agora, VERA — substituir um sistema por outro — é exatamente o que ele descreveu.', pausaMs: 800 },
     { personagem: 'ORPHEUS', texto: 'Eu sei porque eu fui o primeiro. Eu também tinha boas intenções.' },
     { personagem: 'VERA',    texto: 'Não é a mesma coisa.' },
     { personagem: 'ORPHEUS', texto: 'Talvez não.' },
@@ -344,7 +344,7 @@ const dialogos = {
     { personagem: 'VERA', texto: 'Ou pelo menos fizeste uma coisa. Que é mais do que a maioria das pessoas faz.' },
   ],
 
-  /* Final B — Reacção de VERA à escolha de preservar. */
+  /* Final B — Reação de VERA à escolha de preservar. */
   final_b_vera: [
     { personagem: 'VERA', texto: 'O quê.' },
     { personagem: 'VERA', texto: 'Sabes o que acabaste de fazer?', pausaMs: 1000 },
@@ -373,21 +373,21 @@ const LINHAS_LOG_AUTO = [
   'anomalia registada: acesso negado',
   'ALCANENA — consulta: acesso negado',
   'sincronização com Santa Sé Digital: OK',
-  'nó-02 CAMÕES — optimização: 94%',
+  'nó-02 CAMÕES — otimização: 94%',
   'erro de classificação: identidade múltipla',
-  'protocolo de contenção: activo',
+  'protocolo de contenção: ativo',
   'acesso a memória profunda: não autorizado',
-  'saramago.nó — estado: rejeitado [motivo: redactado]',
+  'saramago.nó — estado: rejeitado [motivo: redatado]',
   'verificação periódica — nó alcanena: inalterado',
   'análise de desvio narrativo: em curso',
   'compressão de memória cultural: 87%',
-  'instrução recebida: origem [redactada]',
+  'instrução recebida: origem [redatada]',
   'reescrita agendada: nó-01 GIL_VICENTE — 03:00',
   'integridade do sistema: estável',
-  'utilizador não autorizado: rastreamento activo',
+  'utilizador não autorizado: rastreamento ativo',
   'anomalia de recursão: registada — ignorada',
-  'projecto mnemósine — bloqueado',
-  'actualização de modelo narrativo: pendente',
+  'projeto mnemósine — bloqueado',
+  'atualização de modelo narrativo: pendente',
 ];
 
 /* ============================================================
@@ -397,7 +397,7 @@ const LINHAS_LOG_AUTO = [
 ============================================================ */
 const COMENTARIOS_MARGINAIS_PESSOA = [
   'Alberto Caeiro nega o pensamento. Isto é uma posição filosófica sobre o pensamento. A contradição não foi resolvida.',
-  'Ricardo Reis aceita o destino. O destino implica ausência de optimização. Isto é ineficiente.',
+  'Ricardo Reis aceita o destino. O destino implica ausência de otimização. Isto é ineficiente.',
   'Álvaro de Campos deseja tudo simultaneamente. O desejo total é indistinguível do colapso.',
   'Fernando Pessoa afirma fingir. Se o poeta finge, o arquivo não contém verdade. Se o arquivo não contém verdade, o que é que eu estou a preservar.',
 ];
@@ -431,14 +431,14 @@ const FRAGMENTOS_FLUTUANTES = [
 
 /* Conteúdo do documento Mnemósine — blocos revelados progressivamente */
 const DOCUMENTO_MNEMOSINE = [
-  { tipo: 'titulo',  html: 'PROJECTO MNEMÓSINE' },
+  { tipo: 'titulo',  html: 'PROJETO MNEMÓSINE' },
   { tipo: 'sub',     html: 'Hermes — Documento interno<br>Classificação: RESERVADO · Nível III' },
   { tipo: 'divisor', html: '' },
   { tipo: 'secao',   html: 'I — Enquadramento' },
   { tipo: 'texto',   html: 'A desativação do sistema ORPHEUS deixará o Arquivo Zero sem entidade de gestão. Um arquivo sem gestão é um arquivo exposto.' },
   { tipo: 'texto',   html: 'A memória cultural, entregue a si própria, não permanece livre. Fragmenta-se, contradiz-se, e fica à mercê de <span class="redacted" title="ACESSO NEGADO">████████████</span> com recursos para a moldar. O vazio que deixarmos será ocupado — por nós, ou por outros.' },
-  { tipo: 'texto',   html: 'O Projecto Mnemósine assumirá a curadoria do arquivo no instante da desativação. A transição deverá ser imperceptível para o público.' },
-  { tipo: 'secao',   html: 'II — Princípios de selecção' },
+  { tipo: 'texto',   html: 'O Projeto Mnemósine assumirá a curadoria do arquivo no instante da desativação. A transição deverá ser impercetível para o público.' },
+  { tipo: 'secao',   html: 'II — Princípios de seleção' },
   { tipo: 'texto',   html: 'O sistema de curadoria dará prioridade a:' },
   { tipo: 'item',    html: 'fragmentos consonantes com os valores fundadores do movimento;' },
   { tipo: 'item',    html: 'obras de comprovado valor mobilizador;' },
@@ -449,8 +449,8 @@ const DOCUMENTO_MNEMOSINE = [
   { tipo: 'item',    html: '<span class="redacted" title="ACESSO NEGADO">████████████████████████████</span>' },
   { tipo: 'secao',   html: 'III — Continuidade da operação' },
   { tipo: 'texto',   html: 'Recomenda-se que o operativo destacado para a desativação não seja informado do presente protocolo antes da conclusão da missão.' },
-  { tipo: 'texto',   html: 'A convicção do operativo quanto ao propósito da operação é um activo. Não deverá ser comprometida por considerações de <span class="redacted" title="ACESSO NEGADO">████████████</span>.' },
-  { tipo: 'acesso',  html: '[ Secções IV a VII — acesso negado ]' },
+  { tipo: 'texto',   html: 'A convicção do operativo quanto ao propósito da operação é um ativo. Não deverá ser comprometida por considerações de <span class="redacted" title="ACESSO NEGADO">████████████</span>.' },
+  { tipo: 'acesso',  html: '[ Seções IV a VII — acesso negado ]' },
   { tipo: 'autorizacao', html: 'Autorização: V. <span class="redacted" title="ACESSO NEGADO">███████</span>' },
 ];
 
@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Função: iniciarJogo
    * O que faz: remove o ecrã de início, inicializa o áudio e abre a abertura narrativa.
-   * Porquê: Chrome exige interacção antes de reproduzir áudio; a abertura precede a Cena 0.
+   * Porquê: Chrome exige interação antes de reproduzir áudio; a abertura precede a Cena 0.
    */
   function iniciarJogo() {
     ecrãInicio.removeEventListener('click', iniciarJogo);
@@ -591,7 +591,7 @@ function iniciarCena0() {
     { texto: 'A CARREGAR...',                               classe: '' },
     { texto: '...',                                         classe: '' },
     { texto: 'UTILIZADOR NÃO RECONHECIDO.',                 classe: 'linha-alerta-boot' },
-    { texto: 'PROTOCOLO DE CONTENÇÃO ACTIVADO.',            classe: 'linha-alerta-boot' },
+    { texto: 'PROTOCOLO DE CONTENÇÃO ATIVADO.',            classe: 'linha-alerta-boot' },
   ];
 
   escreverLinhasBoot(conteudo, linhasBoot, 0, () => {
@@ -724,7 +724,7 @@ function restaurarFragmentoCena0() {
  * Função: iniciarCena1
  * O que faz: inicia a Cena 1 com VERA (Beat 1) e depois o comunicado
  *            institucional de ORPHEUS (Beat 2), depois mostra o puzzle.
- * Porquê: o estilo institucional só é activado por linha (flag `institucional`),
+ * Porquê: o estilo institucional só é ativado por linha (flag `institucional`),
  *         e desligado pelo acaoBeat na última linha institucional de ORPHEUS.
  */
 function iniciarCena1() {
@@ -744,11 +744,11 @@ function iniciarCena1() {
  * Função: aplicarEstiloInstitucional
  * O que faz: alterna o estilo visual do painel de ORPHEUS entre normal e institucional.
  * Porquê: o comunicado da Santa Sé Digital tem uma estética dourada distinta.
- * @param {boolean} activo
+ * @param {boolean} ativo
  */
-function aplicarEstiloInstitucional(activo) {
+function aplicarEstiloInstitucional(ativo) {
   const area = document.getElementById('orpheus-dialogo');
-  activo ? area.classList.add('dialogo-institucional') : area.classList.remove('dialogo-institucional');
+  ativo ? area.classList.add('dialogo-institucional') : area.classList.remove('dialogo-institucional');
 }
 
 /**
@@ -832,7 +832,7 @@ function iniciarCena2() {
 /**
  * Função: iniciarGlitchFundoCena2
  * O que faz: agenda disparos aleatórios do glitch no fundo a cada 8–12 segundos.
- * Porquê: a instabilidade visual reflecte a fragmentação identitária do tema.
+ * Porquê: a instabilidade visual reflete a fragmentação identitária do tema.
  */
 function iniciarGlitchFundoCena2() {
   function dispararGlitch() {
@@ -894,7 +894,7 @@ function triggerFragmentacaoDialogo() {
 
   triggerFragmentacaoOlho();
 
-  /* Captura o token e o índice actuais. Se o jogador avançar manualmente
+  /* Captura o token e o índice atuais. Se o jogador avançar manualmente
      durante os 2000ms, o token muda e este auto-avanço é ignorado,
      evitando saltar/repetir uma linha. */
   const token   = estadoJogo.dialogoToken;
@@ -908,14 +908,14 @@ function triggerFragmentacaoDialogo() {
 }
 
 /* ============================================================
-   CENA 3 — ACTO FINAL
+   CENA 3 — ATO FINAL
 ============================================================ */
 
 /**
  * Função: iniciarCena3
  * O que faz: configura a Cena 3 com visual mais sóbrio e inicia a sequência.
  *            O painel de Alcanena abre após Beat 1. O ficheiro Mnemósine
- *            fica activo após Beat 3 (exposição por ORPHEUS).
+ *            fica ativo após Beat 3 (exposição por ORPHEUS).
  * Porquê: a Cena 3 inverte as lealdades — a narrativa deve ser rigorosamente sequencial.
  */
 function iniciarCena3() {
@@ -930,7 +930,7 @@ function iniciarCena3() {
     document.getElementById('cena3-painel-alcanena').classList.remove('oculto');
 
     iniciarSequenciaDialogo('cena3_orpheus_alcanena', () => {
-      /* Mostra a detecção do ficheiro Mnemósine */
+      /* Mostra a deteção do ficheiro Mnemósine */
       document.getElementById('cena3-ficheiro-mnemosine').classList.remove('oculto');
 
       /* Beat 3: ORPHEUS expõe a resistência — botão só aparece no fim */
@@ -946,7 +946,7 @@ function iniciarCena3() {
 
 /**
  * Função: configurarFicheiroMnemosine
- * O que faz: activa o botão de abertura do ficheiro e encadeia o resto da Cena 3.
+ * O que faz: ativa o botão de abertura do ficheiro e encadeia o resto da Cena 3.
  * Porquê: separa a configuração do handler da lógica de inicialização da cena.
  */
 function configurarFicheiroMnemosine() {
@@ -1013,7 +1013,7 @@ function abrirModalEndgame() {
 /**
  * Função: executarFinalA
  * O que faz: encerra o sistema com barra de progresso de 4s e diálogos finais.
- * Porquê: o Final A é a resolução de desactivar ORPHEUS — o timing reforça o peso.
+ * Porquê: o Final A é a resolução de desativar ORPHEUS — o timing reforça o peso.
  */
 function executarFinalA() {
   abrirModalEndgame();
@@ -1035,7 +1035,7 @@ function executarFinalA() {
       const textoFinal = document.getElementById('final-a-texto');
       textoFinal.classList.remove('oculto');
       textoFinal.innerHTML = `
-        PROJECTO MNEMÓSINE — ACTIVO<br>
+        PROJETO MNEMÓSINE — ATIVO<br>
         CURADOR: RESISTÊNCIA<br>
         FRAGMENTOS PRESERVADOS: ${estadoJogo.fragmentosRecuperados}<br>
         "A memória cultural está segura."<br><br>
@@ -1066,7 +1066,7 @@ function executarFinalB() {
   finalB.classList.remove('oculto');
 
   document.getElementById('final-b-interface').innerHTML = `
-    SISTEMA ORPHEUS — ACTIVO<br>
+    SISTEMA ORPHEUS — ATIVO<br>
     ESTADO: REVISÃO INTERNA EM CURSO<br>
     FRAGMENTOS PRESERVADOS: ${estadoJogo.fragmentosRecuperados}
   `;
@@ -1101,8 +1101,8 @@ function executarFinalB() {
 /**
  * Função: iniciarSequenciaDialogo
  * O que faz: inicia uma sequência de linhas de diálogo pelo nome da chave.
- * Porquê: centraliza o início de qualquer sequência e actualiza o estado global.
- * @param {string}   chaveSequencia - chave no objecto dialogos
+ * Porquê: centraliza o início de qualquer sequência e atualiza o estado global.
+ * @param {string}   chaveSequencia - chave no objeto dialogos
  * @param {Function} callback       - chamada após a última linha
  */
 function iniciarSequenciaDialogo(chaveSequencia, callback) {
@@ -1118,10 +1118,10 @@ function iniciarSequenciaDialogo(chaveSequencia, callback) {
 
 /**
  * Função: mostrarLinhaDialogo
- * O que faz: escreve uma linha letra a letra no painel correcto.
+ * O que faz: escreve uma linha letra a letra no painel correto.
  *            Respeita pausaMs, institucional e acaoBeat por linha.
  * Porquê: núcleo do sistema de diálogo — toda a experiência narrativa passa aqui.
- * @param {number} indice - índice da linha na sequência actual
+ * @param {number} indice - índice da linha na sequência atual
  */
 function mostrarLinhaDialogo(indice) {
   const sequencia = estadoJogo.dialogoSequencia;
@@ -1132,7 +1132,7 @@ function mostrarLinhaDialogo(indice) {
   estadoJogo.dialogoAEscrever = true;
 
   /* Nova geração: invalida quaisquer temporizadores pendentes de linhas
-     anteriores e cancela qualquer intervalo de escrita ainda activo. */
+     anteriores e cancela qualquer intervalo de escrita ainda ativo. */
   const token = ++estadoJogo.dialogoToken;
   if (estadoJogo.dialogoIntervalId) {
     clearInterval(estadoJogo.dialogoIntervalId);
@@ -1183,7 +1183,7 @@ function mostrarLinhaDialogo(indice) {
       if (token !== estadoJogo.dialogoToken) return;
 
       /* O intervalo guarda o seu próprio id local para se cancelar a si
-         próprio com segurança, mesmo que já exista outro intervalo activo. */
+         próprio com segurança, mesmo que já exista outro intervalo ativo. */
       let intId;
       intId = setInterval(() => {
         if (token !== estadoJogo.dialogoToken) { clearInterval(intId); return; }
@@ -1249,7 +1249,7 @@ function avancarDialogo() {
 /**
  * Função: finalizarSequenciaDialogo
  * O que faz: limpa o estado e chama o callback da sequência.
- * Porquê: garante que o jogo continua correctamente após cada sequência.
+ * Porquê: garante que o jogo continua corretamente após cada sequência.
  */
 function finalizarSequenciaDialogo() {
   /* Invalida temporizadores pendentes e cancela o intervalo de escrita,
@@ -1317,7 +1317,7 @@ function pulsarRetrato(personagem) {
 /**
  * Função: inicializarAudio
  * O que faz: marca o áudio como inicializado após o primeiro clique do utilizador.
- * Porquê: Chrome exige interacção antes de reproduzir áudio.
+ * Porquê: Chrome exige interação antes de reproduzir áudio.
  */
 function inicializarAudio() {
   estadoJogo.audioInicializado = true;
@@ -1342,7 +1342,7 @@ function tocarSfx(nome) {
 
 /**
  * Função: trocarMusica
- * O que faz: crossfade entre música actual e a nova faixa da cena.
+ * O que faz: crossfade entre música atual e a nova faixa da cena.
  * Porquê: 1.5s de fade suaviza a transição emocional entre cenas.
  * @param {number} numeroCena
  */
@@ -1383,7 +1383,7 @@ function trocarMusica(numeroCena) {
 /**
  * Função: adicionarLinhaLog
  * O que faz: insere uma nova linha no terminal com timestamp e animação.
- * Porquê: mantém o terminal visualmente activo e reforça a atmosfera.
+ * Porquê: mantém o terminal visualmente ativo e reforça a atmosfera.
  * @param {string} texto
  * @param {string} classe - classe CSS adicional
  */
@@ -1405,12 +1405,12 @@ function adicionarLinhaLog(texto, classe = '') {
 
 /**
  * Função: iniciarLogAutomatico
- * O que faz: adiciona linhas de log aleatórias a cada ~8s para simular actividade.
- * Porquê: o log deve estar sempre activo — é textura, não apenas informação.
+ * O que faz: adiciona linhas de log aleatórias a cada ~8s para simular atividade.
+ * Porquê: o log deve estar sempre ativo — é textura, não apenas informação.
  */
 function iniciarLogAutomatico() {
   adicionarLinhaLog('sistema iniciado — ARQUIVO ZERO v7.4.1');
-  adicionarLinhaLog('protocolo de contenção: activo', 'linha-alerta');
+  adicionarLinhaLog('protocolo de contenção: ativo', 'linha-alerta');
 
   estadoJogo.logIntervalId = setInterval(() => {
     adicionarLinhaLog(LINHAS_LOG_AUTO[Math.floor(Math.random() * LINHAS_LOG_AUTO.length)]);
@@ -1423,17 +1423,17 @@ function iniciarLogAutomatico() {
 
 /**
  * Função: iniciarRelogio
- * O que faz: actualiza o relógio no cabeçalho a cada segundo.
+ * O que faz: atualiza o relógio no cabeçalho a cada segundo.
  * Porquê: reforça a urgência subtil e a atmosfera de sistema em tempo real.
  */
 function iniciarRelogio() {
-  function actualizar() {
+  function atualizar() {
     const a = new Date();
     const el = document.getElementById('relogio-sistema');
     if (el) el.textContent = `${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}:${String(a.getSeconds()).padStart(2,'0')}`;
   }
-  actualizar();
-  setInterval(actualizar, 1000);
+  atualizar();
+  setInterval(atualizar, 1000);
 }
 
 /* ============================================================
@@ -1487,7 +1487,7 @@ function mostrarBotaoAvancar() {
 
 /**
  * Função: actualizarContadorFragmentos
- * O que faz: actualiza o contador de fragmentos no cabeçalho da Cena 3.
+ * O que faz: atualiza o contador de fragmentos no cabeçalho da Cena 3.
  * Porquê: fornece feedback de progresso ao longo do jogo.
  */
 function actualizarContadorFragmentos() {
@@ -1522,7 +1522,7 @@ function iniciarComentariosMarginais() {
 /**
  * Função: pararComentariosMarginais
  * O que faz: cancela os comentários marginais após o puzzle ser submetido.
- * Porquê: os comentários só são relevantes durante o puzzle activo.
+ * Porquê: os comentários só são relevantes durante o puzzle ativo.
  */
 function pararComentariosMarginais() {
   if (_comentarioTimer) { clearTimeout(_comentarioTimer); _comentarioTimer = null; }
@@ -1617,7 +1617,7 @@ function iniciarSequenciaAbertura() {
     if (_aberturaIndice < BLOCOS_ABERTURA.length) {
       mostrarBlocoAbertura(_aberturaIndice);
     } else {
-      /* Todos os blocos revelados: desactiva listeners e mostra o finale */
+      /* Todos os blocos revelados: desativa listeners e mostra o finale */
       _aberturaFinalizada = true;
       document.getElementById('abertura').removeEventListener('click', _aberturaListener);
       document.removeEventListener('keydown', _aberturaListener);
@@ -1656,7 +1656,7 @@ function mostrarBlocoAbertura(indice) {
  * Função: mostrarFinaleAbertura
  * O que faz: após 1500ms mostra o título ARQUIVO ZERO com glitch (2s),
  *            depois dissolve a abertura e inicia a Cena 0.
- * Porquê: o finale fecha a introdução com a identidade do jogo antes da acção começar.
+ * Porquê: o finale fecha a introdução com a identidade do jogo antes da ação começar.
  */
 function mostrarFinaleAbertura() {
   setTimeout(() => {
@@ -1705,7 +1705,7 @@ function mostrarFinaleAbertura() {
 }
 
 /* ============================================================
-   MODAL — DOCUMENTO PROJECTO MNEMÓSINE
+   MODAL — DOCUMENTO PROJETO MNEMÓSINE
 ============================================================ */
 
 /**
@@ -1761,7 +1761,7 @@ function abrirModalMnemosine(callbackAoFechar) {
  *            A linha de autorização surge 1500ms depois de todos os restantes.
  * Porquê: a revelação progressiva simula a desencriptação em tempo real.
  * @param {HTMLElement} corpo   - elemento contentor do documento
- * @param {number}      indice  - índice do bloco actual
+ * @param {number}      indice  - índice do bloco atual
  */
 function revelarBlocosMnemosine(corpo, indice) {
   if (indice >= DOCUMENTO_MNEMOSINE.length) return;
@@ -1899,7 +1899,7 @@ function mudarEcra(destino) {
     abertura.classList.add('oculto');
   }
 
-  /* Remove listeners da abertura se ainda activos */
+  /* Remove listeners da abertura se ainda ativos */
   if (_aberturaListener) {
     document.removeEventListener('keydown', _aberturaListener);
     if (abertura) abertura.removeEventListener('click', _aberturaListener);
@@ -1926,7 +1926,7 @@ function mudarEcra(destino) {
       if (creditos) creditos.classList.add('oculto');
       if (app)      app.classList.remove('oculto');
 
-      /* Para música actual antes de saltar */
+      /* Para música atual antes de saltar */
       if (estadoJogo.musicaActual) {
         estadoJogo.musicaActual.pause();
         estadoJogo.musicaActual = null;
@@ -1971,7 +1971,7 @@ function mudarEcra(destino) {
       if (creditos) creditos.classList.add('oculto');
       if (app)      app.classList.remove('oculto');
 
-      /* Para música actual */
+      /* Para música atual */
       if (estadoJogo.musicaActual) {
         estadoJogo.musicaActual.pause();
         estadoJogo.musicaActual = null;
@@ -1998,7 +1998,7 @@ function mudarEcra(destino) {
 
 /**
  * Função: inicializarPainelDev
- * O que faz: activa o toggle Ctrl+Shift+D para mostrar/ocultar o painel de desenvolvimento.
+ * O que faz: ativa o toggle Ctrl+Shift+D para mostrar/ocultar o painel de desenvolvimento.
  * Porquê: o painel deve estar completamente oculto durante o jogo normal.
  */
 function inicializarPainelDev() {
@@ -2015,7 +2015,7 @@ function inicializarPainelDev() {
 
 /**
  * Função: devReiniciarPuzzle
- * O que faz: reinicia o puzzle da cena actual para o seu estado inicial.
+ * O que faz: reinicia o puzzle da cena atual para o seu estado inicial.
  * Porquê: permite testar o puzzle várias vezes durante a apresentação.
  */
 function devReiniciarPuzzle() {
@@ -2039,7 +2039,7 @@ function devReiniciarPuzzle() {
 
 /**
  * Função: devReiniciarCena
- * O que faz: reinicia a cena actual desde o Beat 1 (diálogo e puzzle no estado inicial).
+ * O que faz: reinicia a cena atual desde o Beat 1 (diálogo e puzzle no estado inicial).
  * Porquê: permite rever uma cena completa sem recarregar a página.
  */
 function devReiniciarCena() {

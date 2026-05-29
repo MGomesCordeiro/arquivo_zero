@@ -13,7 +13,7 @@
    Excertos autênticos do Auto da Barca do Inferno (c. 1517),
    cena do Corregedor — figura de autoridade corrompida julgada
    pelo Diabo à beira do rio.
-   A ordem correcta (B→E→C→A→D) reconstrói a cena completa.
+   A ordem correta (B→E→C→A→D) reconstrói a cena completa.
    IDs: gv1=B (chegada), gv5=E (sentença), gv2=C (suborno),
         gv3=A (negação), gv4=D (a mulher) — daí os valores de ordemCorrecta.
 ============================================================ */
@@ -84,7 +84,7 @@ const puzzlePessoa = {
     },
     {
       id: 'p4',
-      texto: 'Sábio é o que se contenta com o espectáculo do mundo.',
+      texto: 'Sábio é o que se contenta com o espetáculo do mundo.',
       colunaCerta: 'Ricardo Reis',
       fonte: 'Odes',
     },
@@ -138,13 +138,13 @@ const puzzlePessoa = {
       imitacaoDe: 'Fernando Pessoa',
     },
   ],
-  mensagemErrada_orpheus: 'Atribuição incorrecta detectada. A classificação não corresponde aos padrões registados.',
+  mensagemErrada_orpheus: 'Atribuição incorreta detetada. A classificação não corresponde aos padrões registados.',
   mensagemErrada_vera: 'Há pelo menos um erro. As imitações dele são quase certas — mas só quase.',
 };
 
 /* ============================================================
    ESTADO DOS PUZZLES
-   Mantém o mapeamento actual de fragmentos para zonas/colunas.
+   Mantém o mapeamento atual de fragmentos para zonas/colunas.
 ============================================================ */
 const estadoPuzzles = {
   /* Cena 1: { idFragmento: numeroZona | null } */
@@ -264,8 +264,8 @@ function configurarDragDropGV() {
 
   /**
    * Função auxiliar: actualizarBotaoSubmeter
-   * O que faz: activa o botão de submeter quando todas as 5 zonas estão preenchidas.
-   * Porquê: o botão só deve estar activo quando há algo para validar.
+   * O que faz: ativa o botão de submeter quando todas as 5 zonas estão preenchidas.
+   * Porquê: o botão só deve estar ativo quando há algo para validar.
    */
   function actualizarBotaoSubmeterGV() {
     const todasPreenchidas = Object.values(estadoPuzzles.gilvicente).every(v => v !== null);
@@ -381,7 +381,7 @@ function configurarDragDropGV() {
 
     const origemCard = card.dataset.origem;
     if (origemCard !== 'lista' && origemCard) {
-      /* Remove da zona e actualiza estado */
+      /* Remove da zona e atualiza estado */
       const zonaConteudo = document.getElementById(`zona-gv-conteudo-${origemCard}`);
       if (zonaConteudo) zonaConteudo.innerHTML = '';
       estadoPuzzles.gilvicente[idFragmento] = null;
@@ -417,25 +417,25 @@ function configurarDragDropGV() {
 /**
  * Função: validarPuzzleGV
  * O que faz: verifica se a ordem dos fragmentos nas zonas corresponde
- *            à ordem correcta e despoleta feedback e narrativa.
+ *            à ordem correta e despoleta feedback e narrativa.
  * Porquê: é o momento de resolução do puzzle — deve dar feedback
- *         claro e continuar a história se correcto.
+ *         claro e continuar a história se correto.
  */
 function validarPuzzleGV() {
   const fragmentos = puzzleGilVicente.fragmentos;
   let todoCorrect = true;
-  const resultados = {}; /* id -> correcto ou não */
+  const resultados = {}; /* id -> correto ou não */
 
   /* Verifica cada fragmento */
   fragmentos.forEach(f => {
     const zonaActual   = estadoPuzzles.gilvicente[f.id];
-    const correcto     = zonaActual === f.ordemCorrecta;
-    resultados[f.id]   = correcto;
-    if (!correcto) todoCorrect = false;
+    const correto     = zonaActual === f.ordemCorrecta;
+    resultados[f.id]   = correto;
+    if (!correto) todoCorrect = false;
   });
 
   if (todoCorrect) {
-    /* Correcto! */
+    /* Correto! */
     if (typeof tocarSfx === 'function') tocarSfx('puzzle_correct');
 
     /* Brilho verde em todos os cartões */
@@ -447,7 +447,7 @@ function validarPuzzleGV() {
       }
     });
 
-    /* Desactiva o botão */
+    /* Desativa o botão */
     const botao = document.getElementById('btn-submeter-gv');
     if (botao) {
       botao.disabled = true;
@@ -466,7 +466,7 @@ function validarPuzzleGV() {
       aplicarGlitch(document.getElementById('btn-submeter-gv'));
     }
 
-    /* Destaca cartões incorrectos */
+    /* Destaca cartões incorretos */
     fragmentos.forEach(f => {
       const card = document.getElementById(`card-${f.id}`);
       if (card && !resultados[f.id]) {
@@ -571,7 +571,7 @@ function iniciarPuzzlePessoa() {
  */
 function renderizarCartaoPessoa(fragmento) {
   /* A fonte (poema/obra) começa oculta — só é revelada quando o puzzle
-     é resolvido correctamente. Durante o puzzle, o jogador tem de
+     é resolvido corretamente. Durante o puzzle, o jogador tem de
      distinguir os originais das imitações apenas pela sensibilidade
      literária, sem a pista da etiqueta de fonte. */
   const fonteHtml = fragmento.fonte
@@ -621,8 +621,8 @@ function configurarDragDropPessoa() {
 
   /**
    * Função auxiliar: actualizarBotaoSubmeterPessoa
-   * O que faz: activa o botão quando todos os 12 fragmentos estão colocados.
-   * Porquê: o botão só deve estar activo quando há algo para validar.
+   * O que faz: ativa o botão quando todos os 12 fragmentos estão colocados.
+   * Porquê: o botão só deve estar ativo quando há algo para validar.
    */
   function actualizarBotaoSubmeterPessoa() {
     const todosColocados = Object.values(estadoPuzzles.pessoa).every(v => v !== null);
@@ -689,7 +689,7 @@ function configurarDragDropPessoa() {
 
       const origemCard = card.dataset.origem;
 
-      /* Actualiza o estado: remove da origem anterior */
+      /* Atualiza o estado: remove da origem anterior */
       if (origemCard !== 'grid') {
         estadoPuzzles.pessoa[idFragmento] = null;
       }
@@ -746,7 +746,7 @@ function configurarDragDropPessoa() {
 
 /**
  * Função: validarPuzzlePessoa
- * O que faz: verifica se cada fragmento está na coluna correcta
+ * O que faz: verifica se cada fragmento está na coluna correta
  *            e dá feedback visual e narrativo.
  * Porquê: o puzzle de Pessoa é mais difícil que o de GV — a
  *         validação deve ser precisa mas o feedback claro.
@@ -761,10 +761,10 @@ function validarPuzzlePessoa() {
 
   fragmentos.forEach(f => {
     const colunaActual = estadoPuzzles.pessoa[f.id];
-    const correcto     = colunaActual === f.colunaCerta;
+    const correto     = colunaActual === f.colunaCerta;
     const card         = document.getElementById(`card-${f.id}`);
 
-    if (correcto) {
+    if (correto) {
       if (card) card.classList.add('correcto');
     } else {
       todosCorrectos = false;
@@ -785,7 +785,7 @@ function validarPuzzlePessoa() {
     const botao = document.getElementById('btn-submeter-pessoa');
     if (botao) {
       botao.disabled = true;
-      botao.textContent = '[ ATRIBUIÇÃO CORRECTA ✓ ]';
+      botao.textContent = '[ ATRIBUIÇÃO CORRETA ✓ ]';
     }
 
     setTimeout(() => {
@@ -811,7 +811,7 @@ function validarPuzzlePessoa() {
       iniciarSequenciaDialogo(chaveTemp);
     }
 
-    /* Reactiva os comentários marginais */
+    /* Reativa os comentários marginais */
     if (typeof iniciarComentariosMarginais === 'function') {
       iniciarComentariosMarginais();
     }
