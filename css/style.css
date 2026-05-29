@@ -1240,14 +1240,21 @@ html, body {
 }
 
 /* Ecrãs finais */
+/* Ecrãs de fim: sobrepõem apenas a coluna central (cena-3 é position:absolute
+   inset:0 dentro da área central), deixando os painéis laterais de diálogo
+   visíveis. Fundo opaco para cobrir o painel de Alcanena por baixo. */
 .cena3-final {
-  flex: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 60;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 24px;
   gap: 16px;
+  overflow-y: auto;
+  background: rgba(5, 5, 14, 0.94);
 }
 
 .final-barra-label {
@@ -2581,4 +2588,32 @@ html, body {
 /* Botões de protocolo lado a lado, com quebra em ecrãs estreitos */
 .modal-corpo-endgame .cena3-botoes-escolha {
   flex-wrap: wrap;
+}
+
+/* ============================================================
+   SECÇÃO 28 — CORREÇÕES: LOGO VANGUARD + SUBTÍTULOS DE CRÉDITOS
+============================================================ */
+
+/* O logótipo Vanguard é quase todo branco: num cartão branco ficaria
+   invisível. Damos-lhe um cartão escuro (em vez do branco das outras
+   marcas), independentemente de onde apareça (início, rodapé, créditos). */
+img[src*="logo_vanguard"] {
+  background: rgba(14, 14, 24, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Subtítulos e notas pequenas na secção de créditos/atribuições */
+.creditos-terceiros-sub {
+  font-family: var(--fonte-interface);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cor-acento-cyan);
+  margin: 16px 0 6px;
+}
+
+.creditos-nota-peq {
+  font-size: 11px;
+  color: var(--cor-texto-dim);
+  font-style: italic;
 }

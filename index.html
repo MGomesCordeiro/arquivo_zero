@@ -8,7 +8,7 @@
   <!-- Fontes: Share Tech Mono para interface, EB Garamond para fragmentos literários -->
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
 
@@ -252,6 +252,21 @@
 
 
           </div>
+
+          <!-- Ecrãs de fim — sobrepõem a área central; os painéis laterais
+               (diálogo de ORPHEUS/VERA) permanecem visíveis por baixo do modal fechado -->
+          <div id="cena3-final-a" class="cena3-final oculto">
+            <div class="final-barra-label">ENCERRAMENTO DO SISTEMA...</div>
+            <div class="final-barra-contentor">
+              <div id="barra-progresso" class="barra-progresso"></div>
+            </div>
+            <div id="final-a-texto" class="final-texto oculto"></div>
+          </div>
+
+          <div id="cena3-final-b" class="cena3-final oculto">
+            <div id="final-b-interface" class="final-b-interface"></div>
+            <div id="final-b-texto" class="final-texto oculto"></div>
+          </div>
         </div>
 
         <!-- BOTÃO DE AVANÇO — Aparece no fim de cada cena -->
@@ -395,17 +410,41 @@
       </div>
 
       <div class="creditos-terceiros">
-        <div class="creditos-terceiros-titulo">CRÉDITOS DE MATERIAIS DE TERCEIROS</div>
-        Música:<br>
-        [título] — [autor] — [licença] — [link]<br><br>
-        Efeitos sonoros:<br>
-        [título] — [autor] — [licença] — [link]<br><br>
-        Imagens:<br>
-        [título/descrição] — [autor/fonte] — [licença] — [link]<br><br>
-        Obras literárias citadas:<br>
-        Gil Vicente, "Auto da Barca do Inferno" (domínio público)<br>
+        <div class="creditos-terceiros-titulo">CRÉDITOS E ATRIBUIÇÕES</div>
+
+        <p class="creditos-terceiros-sub">Música</p>
+        Cena 0 — «Main Menu Theme» — Sascha Dikiciyan<br>
+        Cena 1 — «Transductio» — Metatron Omega (álbum <em>Sanctum</em>)<br>
+        Cena 2 — «Endless Summer» — Fennesz (álbum <em>Endless Summer</em>)<br>
+        Cena 3 — «World Without Light» — Art of Drone<br>
+        <span class="creditos-nota-peq">Faixas pertencentes aos respetivos autores e editoras, utilizadas apenas em contexto académico e sem fins comerciais.</span><br><br>
+
+        <p class="creditos-terceiros-sub">Efeitos sonoros</p>
+        Obtidos em Pixabay — Pixabay Content License (utilização livre, sem royalties).<br><br>
+
+        <p class="creditos-terceiros-sub">Imagens de referência (domínio público)</p>
+        «Orphée» — Gustave Moreau, 1865<br>
+        «Mnemosyne» — Dante Gabriel Rossetti, 1881<br>
+        «La Vérité» — Jules Joseph Lefebvre, 1870<br>
+        «Hermes de Praxíteles» — c. 330 a.C.<br><br>
+
+        <p class="creditos-terceiros-sub">Restantes imagens</p>
+        Cenários, retratos e elementos gráficos gerados com ChatGPT (OpenAI).<br>
+        Logótipos institucionais — propriedade das respetivas entidades.<br><br>
+
+        <p class="creditos-terceiros-sub">Tipografia</p>
+        Share Tech Mono e EB Garamond — Google Fonts (SIL Open Font License).<br><br>
+
+        <p class="creditos-terceiros-sub">Obras literárias citadas</p>
+        Gil Vicente, «Auto da Barca do Inferno» (domínio público)<br>
         Fernando Pessoa, excertos de Caeiro, Reis, Campos e do ortónimo (domínio público)<br>
-        Referências a Luís de Camões e a José Saramago (sem citação direta)
+        George Orwell, «1984» — excerto citado<br>
+        Referências a Luís de Camões e a José Saramago (sem citação direta)<br><br>
+
+        <p class="creditos-terceiros-sub">Autoria</p>
+        Programação e implementação técnica: Claude Code (Anthropic) com Miguel Cordeiro.<br>
+        Guião, worldbuilding e história: Claude (Anthropic) com Miguel Cordeiro.<br>
+        <span class="creditos-nota-peq">Projeto de natureza experimental, desenvolvido em estreita colaboração com modelos de IA (<em>vibe coding</em>).</span>
       </div>
     </div>
   </div>
@@ -468,21 +507,6 @@
           </div>
         </div>
 
-        <!-- Ecrã de fim — Final A -->
-        <div id="cena3-final-a" class="cena3-final oculto">
-          <div class="final-barra-label">ENCERRAMENTO DO SISTEMA...</div>
-          <div class="final-barra-contentor">
-            <div id="barra-progresso" class="barra-progresso"></div>
-          </div>
-          <div id="final-a-texto" class="final-texto oculto"></div>
-        </div>
-
-        <!-- Ecrã de fim — Final B -->
-        <div id="cena3-final-b" class="cena3-final oculto">
-          <div id="final-b-interface" class="final-b-interface"></div>
-          <div id="final-b-texto" class="final-texto oculto"></div>
-        </div>
-
       </div>
     </div>
   </div>
@@ -513,8 +537,8 @@
   </div>
 
   <!-- Scripts — engine.js primeiro (motor central), depois puzzles.js -->
-  <script src="js/engine.js?v=7"></script>
-  <script src="js/puzzles.js?v=7"></script>
+  <script src="js/engine.js?v=8"></script>
+  <script src="js/puzzles.js?v=8"></script>
 
 </body>
 </html>

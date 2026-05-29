@@ -1011,12 +1011,31 @@ function abrirModalEndgame() {
 }
 
 /**
+ * Função: fecharModalEndgame
+ * O que faz: desvanece e oculta o modal da escolha final.
+ * Porquê: depois de o jogador escolher, o modal tem de sair de cena para
+ *         não tapar os painéis de diálogo de ORPHEUS/VERA — o desenlace
+ *         (barra/estado + texto + créditos) passa a aparecer na coluna central.
+ */
+function fecharModalEndgame() {
+  const modal = document.getElementById('modal-endgame');
+  if (!modal || modal.classList.contains('oculto')) return;
+  modal.style.transition = 'opacity 0.35s ease';
+  modal.style.opacity    = '0';
+  setTimeout(() => {
+    modal.classList.add('oculto');
+    modal.style.opacity    = '';
+    modal.style.transition = '';
+  }, 350);
+}
+
+/**
  * Função: executarFinalA
  * O que faz: encerra o sistema com barra de progresso de 4s e diálogos finais.
  * Porquê: o Final A é a resolução de desativar ORPHEUS — o timing reforça o peso.
  */
 function executarFinalA() {
-  abrirModalEndgame();
+  fecharModalEndgame();
   tocarSfx('scene_transition');
   document.getElementById('cena3-escolha-final').classList.add('oculto');
 
@@ -1059,7 +1078,7 @@ function executarFinalA() {
  * Porquê: o Final B é moralmente ambíguo — o visual mais limpo contrasta com o peso.
  */
 function executarFinalB() {
-  abrirModalEndgame();
+  fecharModalEndgame();
   document.getElementById('cena3-escolha-final').classList.add('oculto');
 
   const finalB = document.getElementById('cena3-final-b');
