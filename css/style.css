@@ -1436,7 +1436,7 @@ html, body {
 
 .fragmento-fonte-pessoa {
   font-size: 10px;
-  color: var(--cor-texto-dim);
+  color: var(--cor-acento-cyan);
   font-family: var(--fonte-interface);
 }
 
@@ -1454,7 +1454,7 @@ html, body {
 }
 
 .coluna-header {
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: 1px;
   padding: 6px 8px;
   text-align: center;
@@ -1462,9 +1462,14 @@ html, body {
   margin-bottom: 4px;
 }
 
-.coluna-header-normal { color: var(--cor-texto-dim); }
+.coluna-header-normal {
+  color: var(--cor-texto);
+  font-weight: 700;
+  text-shadow: 0 0 6px rgba(78, 205, 196, 0.25);
+}
 .coluna-header-orpheus {
   color: var(--cor-acento-vermelho);
+  font-weight: 700;
   border-bottom-color: rgba(192, 57, 43, 0.3);
 }
 

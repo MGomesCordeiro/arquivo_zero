@@ -31,6 +31,11 @@ const estadoJogo = {
   dialogoAEscrever:      false,
   dialogoIntervalId:     null,
   dialogoCallback:       null,
+  /* Token de geração: incrementado sempre que uma linha começa, é
+     completada ou a sequência termina. Os temporizadores assíncronos
+     capturam o token vigente e abortam se ele mudar — evita que
+     intervalos/timeouts órfãos de linhas anteriores corrompam a linha actual. */
+  dialogoToken:          0,
   audioInicializado:     false,
   musicaActual:          null,
   fragmentosRecuperados: 0,
@@ -887,10 +892,16 @@ function triggerFragmentacaoDialogo() {
 
   triggerFragmentacaoOlho();
 
-  /* Após 2000ms limpa e avança automaticamente para a linha seguinte */
+  /* Captura o token e o índice actuais. Se o jogador avançar manualmente
+     durante os 2000ms, o token muda e este auto-avanço é ignorado,
+     evitando saltar/repetir uma linha. */
+  const token   = estadoJogo.dialogoToken;
+  const proximo = estadoJogo.dialogoActual + 1;
+
   setTimeout(() => {
+    if (token !== estadoJogo.dialogoToken) return;
     areaTexto.innerHTML = '';
-    mostrarLinhaDialogo(estadoJogo.dialogoActual + 1);
+    mostrarLinhaDialogo(proximo);
   }, 2000);
 }
 
@@ -1094,6 +1105,14 @@ function mostrarLinhaDialogo(indice) {
   estadoJogo.dialogoActual    = indice;
   estadoJogo.dialogoAEscrever = true;
 
+  /* Nova geração: invalida quaisquer temporizadores pendentes de linhas
+     anteriores e cancela qualquer intervalo de escrita ainda activo. */
+  const token = ++estadoJogo.dialogoToken;
+  if (estadoJogo.dialogoIntervalId) {
+    clearInterval(estadoJogo.dialogoIntervalId);
+    estadoJogo.dialogoIntervalId = null;
+  }
+
   /* Aplica/remove estilo institucional conforme a linha */
   if (linha.institucional) {
     aplicarEstiloInstitucional(true);
@@ -1109,6 +1128,9 @@ function mostrarLinhaDialogo(indice) {
   const eOrpheus  = linha.personagem === 'ORPHEUS';
 
   setTimeout(() => {
+    /* Aborta se entretanto começou outra linha (token mudou) */
+    if (token !== estadoJogo.dialogoToken) return;
+
     actualizarEstadoFala(linha.personagem);
 
     const areaTexto = document.getElementById(eOrpheus ? 'orpheus-texto' : 'vera-texto');
@@ -1118,6 +1140,7 @@ function mostrarLinhaDialogo(indice) {
     /* Limpa com fade rápido */
     areaTexto.style.opacity = '0';
     setTimeout(() => {
+      if (token !== estadoJogo.dialogoToken) return;
       areaTexto.textContent = '';
       areaTexto.style.opacity = '1';
     }, PAUSA_ENTRE_DIALOGOS);
@@ -1130,22 +1153,28 @@ function mostrarLinhaDialogo(indice) {
     const velocidade = eOrpheus ? VELOCIDADE_ORPHEUS : VELOCIDADE_VERA;
     let i = 0;
 
-    if (estadoJogo.dialogoIntervalId) clearInterval(estadoJogo.dialogoIntervalId);
-
     setTimeout(() => {
-      estadoJogo.dialogoIntervalId = setInterval(() => {
+      if (token !== estadoJogo.dialogoToken) return;
+
+      /* O intervalo guarda o seu próprio id local para se cancelar a si
+         próprio com segurança, mesmo que já exista outro intervalo activo. */
+      let intId;
+      intId = setInterval(() => {
+        if (token !== estadoJogo.dialogoToken) { clearInterval(intId); return; }
         if (i < linha.texto.length) {
           /* Ignora '\n' no display — substituído por espaço visual */
           areaTexto.textContent += linha.texto[i] === '\n' ? ' ' : linha.texto[i];
           i++;
         } else {
-          clearInterval(estadoJogo.dialogoIntervalId);
+          clearInterval(intId);
+          if (estadoJogo.dialogoIntervalId === intId) estadoJogo.dialogoIntervalId = null;
           estadoJogo.dialogoAEscrever = false;
           if (avancoEl) avancoEl.classList.remove('oculto');
           if (cursor)   cursor.style.display = 'none';
           if (linha.acaoBeat) linha.acaoBeat();
         }
       }, velocidade);
+      estadoJogo.dialogoIntervalId = intId;
     }, PAUSA_ENTRE_DIALOGOS);
 
   }, pausa);
@@ -1167,9 +1196,19 @@ function avancarDialogo() {
   const avancoEl  = document.getElementById(eOrpheus ? 'orpheus-avanco' : 'vera-avanco');
 
   if (estadoJogo.dialogoAEscrever) {
-    clearInterval(estadoJogo.dialogoIntervalId);
+    /* Completa a linha instantaneamente. Incrementar o token invalida
+       qualquer setTimeout/setInterval pendente desta linha (ex.: a escrita
+       ainda não tinha arrancado por causa de pausaMs), evitando órfãos. */
+    estadoJogo.dialogoToken++;
+    if (estadoJogo.dialogoIntervalId) {
+      clearInterval(estadoJogo.dialogoIntervalId);
+      estadoJogo.dialogoIntervalId = null;
+    }
     estadoJogo.dialogoAEscrever = false;
-    if (areaTexto && linha) areaTexto.textContent = linha.texto.replace(/\n/g, ' ');
+    if (areaTexto && linha) {
+      areaTexto.style.opacity = '1';
+      areaTexto.textContent   = linha.texto.replace(/\n/g, ' ');
+    }
     if (avancoEl) avancoEl.classList.remove('oculto');
     if (cursor)   cursor.style.display = 'none';
     if (linha && linha.acaoBeat) linha.acaoBeat();
@@ -1187,6 +1226,13 @@ function avancarDialogo() {
  * Porquê: garante que o jogo continua correctamente após cada sequência.
  */
 function finalizarSequenciaDialogo() {
+  /* Invalida temporizadores pendentes e cancela o intervalo de escrita,
+     garantindo que nada continua a correr depois do fim da sequência. */
+  estadoJogo.dialogoToken++;
+  if (estadoJogo.dialogoIntervalId) {
+    clearInterval(estadoJogo.dialogoIntervalId);
+    estadoJogo.dialogoIntervalId = null;
+  }
   estadoJogo.dialogoAEscrever = false;
   const cb = estadoJogo.dialogoCallback;
   estadoJogo.dialogoSequencia = [];

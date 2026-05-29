@@ -13,34 +13,36 @@
    Excertos autênticos do Auto da Barca do Inferno (c. 1517),
    cena do Corregedor — figura de autoridade corrompida julgada
    pelo Diabo à beira do rio.
-   A ordem correcta (B→C→A→D→E) reconstrói a cena completa.
+   A ordem correcta (B→E→C→A→D) reconstrói a cena completa.
+   IDs: gv1=B (chegada), gv5=E (sentença), gv2=C (suborno),
+        gv3=A (negação), gv4=D (a mulher) — daí os valores de ordemCorrecta.
 ============================================================ */
 const puzzleGilVicente = {
   fragmentos: [
     {
-      id: 'gv1',
+      id: 'gv1', /* Fragmento B — a chegada do Corregedor */
       texto: 'CORREGEDOR — Hou da barca!\nDIABO — Quem está aí?\nCORREGEDOR — O Corregedor me chamam.\nDIABO — Oh, que precioso carregador!\nComo vindes vós, meu senhor,\nde feitos tão carregado!',
       ordemCorrecta: 1,
     },
     {
-      id: 'gv2',
+      id: 'gv2', /* Fragmento C — o suborno das sentenças */
       texto: 'CORREGEDOR — E uma pessoa de estado\nir pera o Inferno...\nDIABO — Oh, juiz amado!\nE o dinheiro que ganhais\ncom as sentenças que dais?',
-      ordemCorrecta: 2,
-    },
-    {
-      id: 'gv3',
-      texto: 'CORREGEDOR — Não tomei eu cá suborno!\nDIABO — E o coelho e o perdigão,\ne a perdiz, tudo na mão...\nCORREGEDOR — Isso dava-m\'o o escrivão!',
       ordemCorrecta: 3,
     },
     {
-      id: 'gv4',
-      texto: 'DIABO — Dava-vo-lo por amor\nda senhora sua mulher,\npera vos fazer querer\no que ele bem quisesse.',
+      id: 'gv3', /* Fragmento A — a negação do suborno */
+      texto: 'CORREGEDOR — Não tomei eu cá suborno!\nDIABO — E o coelho e o perdigão,\ne a perdiz, tudo na mão...\nCORREGEDOR — Isso dava-m\'o o escrivão!',
       ordemCorrecta: 4,
     },
     {
-      id: 'gv5',
-      texto: 'CORREGEDOR — Vós m\'os haveis de levar?\nDIABO — E no Inferno descarregar.\nEntrai, passaremos ora.\nCORREGEDOR — Non est de jure.\nDIABO — In hoc jure haveis de ir.',
+      id: 'gv4', /* Fragmento D — o presente da mulher */
+      texto: 'DIABO — Dava-vo-lo por amor\nda senhora sua mulher,\npera vos fazer querer\no que ele bem quisesse.',
       ordemCorrecta: 5,
+    },
+    {
+      id: 'gv5', /* Fragmento E — a sentença final, embarque */
+      texto: 'CORREGEDOR — Vós m\'os haveis de levar?\nDIABO — E no Inferno descarregar.\nEntrai, passaremos ora.\nCORREGEDOR — Non est de jure.\nDIABO — In hoc jure haveis de ir.',
+      ordemCorrecta: 2,
     },
   ],
   mensagemErrada_orpheus: 'Configuração inválida. A sequência não corresponde ao padrão narrativo registado.',
@@ -262,7 +264,7 @@ function configurarDragDropGV() {
 
   /**
    * Função auxiliar: actualizarBotaoSubmeter
-   * O que faz: activa o botão de submeter quando todas as 7 zonas estão preenchidas.
+   * O que faz: activa o botão de submeter quando todas as 5 zonas estão preenchidas.
    * Porquê: o botão só deve estar activo quando há algo para validar.
    */
   function actualizarBotaoSubmeterGV() {
@@ -568,8 +570,12 @@ function iniciarPuzzlePessoa() {
  * @returns {string} HTML do cartão
  */
 function renderizarCartaoPessoa(fragmento) {
+  /* A fonte (poema/obra) começa oculta — só é revelada quando o puzzle
+     é resolvido correctamente. Durante o puzzle, o jogador tem de
+     distinguir os originais das imitações apenas pela sensibilidade
+     literária, sem a pista da etiqueta de fonte. */
   const fonteHtml = fragmento.fonte
-    ? `<div class="fragmento-fonte-pessoa">— ${fragmento.fonte}</div>`
+    ? `<div class="fragmento-fonte-pessoa oculto">— ${fragmento.fonte}</div>`
     : '';
 
   return `
@@ -771,6 +777,10 @@ function validarPuzzlePessoa() {
 
   if (todosCorrectos) {
     if (typeof tocarSfx === 'function') tocarSfx('puzzle_correct');
+
+    /* Revela a fonte (poema/obra) de cada original como confirmação.
+       As imitações continuam sem fonte — o contraste é a recompensa. */
+    document.querySelectorAll('.fragmento-fonte-pessoa').forEach(el => el.classList.remove('oculto'));
 
     const botao = document.getElementById('btn-submeter-pessoa');
     if (botao) {
